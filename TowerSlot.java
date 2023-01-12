@@ -40,15 +40,7 @@ public class TowerSlot {
             if (tower == null){
                 for (int i = 0; i < INITIAL_NUM_OF_UPGRADES; i++){ // TODO finish tower class and limit num of buttons to upgrades
                     if (i == 0) {
-                        g.setColor (new Color(72, 156, 80));
-                    } else if (i == 1){
-                        g.setColor(new Color(235, 182, 77));
-                    }else if (i == 2){
-                        g.setColor(new Color(167, 154, 252));
-                    } else if (i == 3){
-                        g.setColor(new Color(168, 153, 131));
-                    }else if (i == 4){
-                        g.setColor(new Color(120, 120, 120));
+                        
                     }
                     g.fillOval(x+BUTTON_OFFSETS[i][0]-offsetX, y+BUTTON_OFFSETS[i][1]-offsetY, BUTTON_DIAM, BUTTON_DIAM);
                 }

@@ -33,7 +33,7 @@ public class Selection {
         this.u = u;
         object = UNIT;
     }
-    public void deselect(){
+    public void selectGround(){
         if (object == TOWER){
             object = NONE;
             t.unfocus();
@@ -41,6 +41,18 @@ public class Selection {
         } else if (object == UNIT){
             // nothing happens
         }
+    }
+    public void deselect(){
+        if (object == TOWER){
+            object = NONE;
+            t.unfocus();
+            t = null;
+        } else if (object == UNIT){
+            object = NONE;
+            u.unfocus();
+            u = null;
+        }
+
     }
 
     public TowerSlot tower(){

@@ -43,7 +43,7 @@ public class Tower {
         g.setColor(color);
         g.fillRect(x, y, size, size);
     }
-    public Tower upgrade(int buttonClicked) {
+    public static Tower upgrade(int tower) {
         
         return null;
     }

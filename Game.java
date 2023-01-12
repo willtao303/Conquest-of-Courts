@@ -127,7 +127,7 @@ public class Game {
 
                     
                     if (!somethingWasClicked){
-                        selection.deselect();
+                        selection.selectGround();
                     }
                 }
                 
