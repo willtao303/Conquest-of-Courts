@@ -3,11 +3,6 @@ import java.awt.Graphics;
 import java.awt.Color;
 
 public class Tower {
-    public static final int ARCHER = 1;
-    public static final int BOMBER = 2;
-    public static final int BARRACK = 3;
-    public static final int MAGE = 4;
-    public static final int CASTLE = 5;
 
     protected Color color;
     public int NUM_OF_UPGRADES = 3;
@@ -17,6 +12,8 @@ public class Tower {
     protected int hp, maxHp;
 
     protected int range;
+
+    public static final int NONE = -1;
 
     public static final int PROJECTILE = 1;
     public static final int BALLISTIC = 2;
@@ -31,21 +28,32 @@ public class Tower {
     protected int cooldown;
     protected int cooldownCounter = 0;
 
-    Tower(int x, int y, int hp){
+    int preset;
+
+
+    Tower(int x, int y, int preset){
         this.x = x;
         this.y = y;
+        this.preset = preset;
+        maxHp = TowerPreset.STATS[preset][0];
+        hp = maxHp;
+        range = TowerPreset.STATS[preset][1];
+        projectile = TowerPreset.STATS[preset][2];
+        unitType = TowerPreset.STATS[preset][3];
+        dmg = TowerPreset.STATS[preset][4];
+        cooldown = TowerPreset.STATS[preset][5];
+        NUM_OF_UPGRADES = TowerPreset.UPGRADES[preset].length;
+    }
+    Tower(int x, int y, int hp, int preset){
+        this(x, y, preset);
         this.hp = hp;
     }
     public void update(EnemyManager e, UnitManager u){
 
     }
     public void draw(int x, int y, int size, Graphics g) {
-        g.setColor(color);
+        g.setColor(TowerPreset.COLOR[preset]);
         g.fillRect(x, y, size, size);
-    }
-    public static Tower upgrade(int tower) {
-        
-        return null;
     }
 
     public void shoot(){
@@ -58,7 +66,6 @@ public class Tower {
 
         }
     }
-    
 
     public int upgradeByButton(int id){
         if (id < NUM_OF_UPGRADES){

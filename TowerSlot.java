@@ -3,7 +3,6 @@ import java.awt.Graphics;
 import java.awt.Color;
 
 public class TowerSlot {
-
     EnemyManager enemies;
 
     Tower tower;
@@ -15,11 +14,11 @@ public class TowerSlot {
         {15, 58},
         {-35, 65}
     };
-    private final static int INITIAL_NUM_OF_UPGRADES = 5;
+    private final static int NUM_BUTTONS = 5;
     private final static int[] INITIAL_UPGRADES = {
-        Tower.ARCHER,
-        Tower.BOMBER,
-        Tower.MAGE,
+        TowerPreset.ARCHER,
+        TowerPreset.BOMBER,
+        TowerPreset.MAGE,
         -1,
         -1
     };
@@ -38,9 +37,24 @@ public class TowerSlot {
     public void draw(int offsetX, int offsetY, Graphics g){
         if (focused){
             if (tower == null){
-                for (int i = 0; i < INITIAL_NUM_OF_UPGRADES; i++){ // TODO finish tower class and limit num of buttons to upgrades
-                    if (i == 0) {
-                        
+                g.setColor(Color.GRAY);
+                for (int i = 0; i < NUM_BUTTONS; i++){ // TODO finish tower class and limit num of buttons to upgrades
+                    if (this.tower != null){
+                        if (i < tower.NUM_OF_UPGRADES){
+                            if (TowerPreset.UPGRADES[tower.preset][i] != -1){
+                                g.setColor(TowerPreset.COLOR[TowerPreset.UPGRADES[tower.preset][i]]);
+                            } else {
+                                g.setColor(Color.GRAY);
+                            }
+                        }
+                    } else {
+                        if (i < INITIAL_UPGRADES.length){
+                            if (INITIAL_UPGRADES[i] != -1){
+                                g.setColor(TowerPreset.COLOR[INITIAL_UPGRADES[i]]);
+                            } else {
+                                g.setColor(Color.GRAY);
+                            }
+                        }
                     }
                     g.fillOval(x+BUTTON_OFFSETS[i][0]-offsetX, y+BUTTON_OFFSETS[i][1]-offsetY, BUTTON_DIAM, BUTTON_DIAM);
                 }
@@ -84,7 +98,11 @@ public class TowerSlot {
             buttonClicked++;
         }
         if (buttonClicked != BUTTON_OFFSETS.length){
-            // TODO
+            if (tower == null){
+                tower = new Tower(x, y, INITIAL_UPGRADES[buttonClicked]);
+            } else {
+                tower = new Tower(x, y, tower.UPGRADES[buttonClicked]);
+            }
             return true;
         }
         return false;
