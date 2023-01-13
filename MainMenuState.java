@@ -18,7 +18,7 @@ public class MainMenuState extends State {
         }
 
         if (buttons[0].isReleased()){
-            handler.changeState(SANDBOX);
+            handler.changeState(MULTIPLAYER);
         }
     }
 

@@ -3,6 +3,7 @@ import java.awt.Graphics;
 
 public abstract class State {
     public final static int MAIN_MENU = 0;
+    public final static int MULTIPLAYER = 2;
     public final static int SANDBOX = 4;
     protected Input input;
     protected Renderer window;

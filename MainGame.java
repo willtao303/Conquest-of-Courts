@@ -10,7 +10,7 @@ public class MainGame {
     State[] states = new State[]{
         new MainMenuState(), 
         null, // login
-        null,// multiplayer
+        new MultiplayerState(),// multiplayer
         null,// singleplayer
         new SandboxState()
     };
