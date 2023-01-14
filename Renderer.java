@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import GameAssets.*;
+import Components.TextField;
 
 public class Renderer {
     JFrame frame;
@@ -30,6 +31,7 @@ public class Renderer {
         canvas.addKeyListener(input);
         canvas.addMouseListener(input);
         canvas.addMouseMotionListener(input);
+        canvas.addMouseWheelListener(input);
 
         frame.add(canvas); 
 
@@ -82,7 +84,12 @@ public class Renderer {
     public boolean isFullscreen(){
         return fullscreen;
     }
-
+    public void addTextField(TextField t){
+        canvas.addKeyListener(t);
+    }
+    public void closeTextField(TextField t){
+        canvas.removeKeyListener(t);
+    }
     class GraphicsPanel extends JPanel {
         public GraphicsPanel(){
             setFocusable(true);

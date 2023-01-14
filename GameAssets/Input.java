@@ -1,13 +1,15 @@
 package GameAssets;
 
 import java.util.HashMap;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 
-public class Input implements KeyListener, MouseMotionListener, MouseListener {
+public class Input implements KeyListener, MouseMotionListener, MouseListener, MouseWheelListener {
     public static final char UP   = 0;
     public static final char DOWN = 1;
     public static final char LEFT = 2;
@@ -18,6 +20,7 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
     public static final char ESC = 7;
     public static final char FULLSCREEN = 8;
     public static final char MULTISELECT = 9;
+    public static final char SEND = 10;
 
     public static final int LMB = 0;
     public static final int MIDDLECLICK = 1;
@@ -33,11 +36,22 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
     private int[] mouseTap = new int[5]; 
     private int mouseX = 0;
     private int mouseY = 0;
+    private int scroll = 0;
+    private char changeKeybind = 42069;
 
     public Input(){
         this.defualtKeybinds();
     }
 
+    public void resetTapped(){
+        for (int i = 0; i < 5; i ++){
+            mouseTap[i] = 0;
+        }
+        scroll = 0;
+    }
+    public int scroll(){
+        return scroll;
+    }
     public boolean keyIsDown(int key){
         return keyDown.get(key);
     }
@@ -65,10 +79,10 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
         }
         return false;
     }
+
     public boolean mouseIsTapped(int button){
         if (button < 5){
             if (mouseTap[button]==1){
-                mouseTap[button] = 2;
                 return true;
             }
         }
@@ -76,8 +90,7 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
     }
     public boolean mouseIsReleased(int button){
         if (button < 5){
-            if (mouseTap[button]==3){
-                mouseTap[button] = 0;
+            if (mouseTap[button]==2){
                 return true;
             }
         }
@@ -102,47 +115,36 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
         keyBind.put(ESC, KeyEvent.VK_ESCAPE);
         keyBind.put(FULLSCREEN, KeyEvent.VK_F11);
         keyBind.put(MULTISELECT, KeyEvent.VK_SHIFT);
+        keyBind.put(SEND, KeyEvent.VK_ENTER);
     }
-
-    public void setKeybind(char key, int keybind){
-        keyBind.replace(key, keybind);
+    public void setKeybind(char keybind){
+        if (keyBind.containsKey(keyBind)){
+            changeKeybind = keybind;
+        }
     }
 
     @Override
     public void mouseClicked(MouseEvent m) {
-        // TODO Auto-generated method stub
     }
     @Override
     public void mousePressed(MouseEvent m) {
         if (m.getButton() <= 5){
             this.mouseDown[m.getButton()-1] = true;
-            if (this.mouseTap[m.getButton()-1] == 1){
-                this.mouseTap[m.getButton()-1] = 2;
-            }
-            if (this.mouseTap[m.getButton()-1]==0 || this.mouseTap[m.getButton()-1]==3) {
-                this.mouseTap[m.getButton()-1] = 1;
-            }
-            
+            this.mouseTap[m.getButton()-1] = 1;
         }
     }
     @Override
     public void mouseReleased(MouseEvent m) {
         if (m.getButton() <= 5){
             this.mouseDown[m.getButton()-1] = false;
-            if (this.mouseTap[m.getButton()-1] == 2){
-                this.mouseTap[m.getButton()-1] = 3;
-            }
+            this.mouseTap[m.getButton()-1] = 2;
         }
     }
     @Override
     public void mouseEntered(MouseEvent m) {
-        // TODO Auto-generated method stub
-        
     }
     @Override
     public void mouseExited(MouseEvent m) {
-        // TODO Auto-generated method stub
-        
     }
     @Override
     public void mouseDragged(MouseEvent m) {
@@ -155,6 +157,10 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
         this.mouseY = m.getY();
     }
     @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        scroll = e.getWheelRotation();
+    }
+    @Override
     public void keyTyped(KeyEvent e) {
     }
     @Override
@@ -163,6 +169,11 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
         int key = e.getKeyCode();
         keyTapped = e.getKeyCode();
         keyDown.put(key, true);
+
+        if (changeKeybind != 42069){
+            keyBind.replace(changeKeybind, e.getKeyCode());
+            changeKeybind = 42069;
+        }
     }
     @Override
     public void keyReleased(KeyEvent e) {

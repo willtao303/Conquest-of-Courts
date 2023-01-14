@@ -1,9 +1,19 @@
 import java.awt.Graphics;
+import java.awt.Color;
+import GameAssets.Consts;
+import GameAssets.Input;
+import Components.*;
 
 public class MainMenuState extends State {
-    Button[] buttons = {new StartButton(Consts.WINDOWWIDTH/2, Consts.WINDOWHEIGHT/2+100)};
+    Button[] buttons = {
+        new ImageButton(Consts.WINDOWWIDTH/2, Consts.WINDOWHEIGHT/2+50, Button.START_BUTTON),
+        new BasicButton(Consts.WINDOWWIDTH/2, Consts.WINDOWHEIGHT/2+150, 800, 80),
+        new BasicButton(Consts.WINDOWWIDTH/2-50, Consts.WINDOWHEIGHT/2+250, 700, 80),
+        new BasicButton(Consts.WINDOWWIDTH/2+360, Consts.WINDOWHEIGHT/2+250, 80, 80)
+
+    };
     @Override
-    public void start() {}
+    public void start(Object [] args) {}
 
     @Override
     public void run() {
@@ -19,6 +29,12 @@ public class MainMenuState extends State {
 
         if (buttons[0].isReleased()){
             handler.changeState(MULTIPLAYER);
+        } else if (buttons[1].isReleased()){
+            handler.changeState(USERNAME);
+        }else if (buttons[2].isReleased()){
+            handler.changeState(LOBBY);
+        }else if (buttons[3].isReleased()){
+            handler.changeState(SETTINGS);
         }
     }
 
@@ -30,9 +46,8 @@ public class MainMenuState extends State {
     }
 
     @Override
-    public void end() {
-        // TODO Auto-generated method stub
-        
+    public Object[] end() {
+        return null;
     }
     
 }

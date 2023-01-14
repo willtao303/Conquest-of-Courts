@@ -1,10 +1,11 @@
 import java.awt.Graphics;
+import GameAssets.*;
 
 public class SandboxState extends State{
     Game game;
 
     @Override
-    public void start() {
+    public void start(Object[] args) {
         game = new Game();
         game.setup(input);
     }
@@ -21,9 +22,8 @@ public class SandboxState extends State{
     }
 
     @Override
-    public void end() {
-        // TODO Auto-generated method stub
-        
+    public Object[] end() {
+        return null;
     }
     
 }

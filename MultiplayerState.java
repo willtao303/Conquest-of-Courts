@@ -3,42 +3,36 @@ import java.awt.Color;
 import GameAssets.*;
 
 public class MultiplayerState extends State{
-    Game game;
-    Client opponent;
+    Client client;
 
     @Override
-    public void start() {
-        game = new Game();
-        game.setup(input);
-        opponent = new Client();
-        opponent.setEnemyManager(game.getEnemyManager());
-        opponent.setGame(game);
+    public void start(Object[]args) {
+        client = new Client();
+        //client.setEnemyManager(game.getEnemyManager());
+        //client.setGame(game);
     }
 
     @Override
     public void run() {
-        if (!opponent.connected){
-            opponent.setup();
+        if (!client.connected){
+            client.setup();
         } else {
-            game.run();
-            opponent.run();
+            client.run();
         }
     }
 
     @Override
     public void draw(Graphics g) {
-        if (!opponent.connected){
+        if (!client.connected){
             g.setColor(Color.BLACK);
             g.drawString("Connecting...", Consts.WINDOWWIDTH/2 - 10, Consts.WINDOWHEIGHT/2 - 5);
         } else {
-            game.render(g);
         }
     }
 
     @Override
-    public void end() {
-        // TODO Auto-generated method stub
-        
+    public Object[] end() {
+        return null;
     }
     
 }

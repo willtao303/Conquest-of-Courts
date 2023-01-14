@@ -1,4 +1,4 @@
-public class AAFileToTestThings {
+class AAFileToTestThings {
     public static void main(String[] args) {
         long k = (Integer.MAX_VALUE);
         k -= Integer.MIN_VALUE;

@@ -1,3 +1,5 @@
+package Components;
+
 import java.awt.Image;
 import java.awt.Graphics;
 
@@ -9,20 +11,22 @@ public abstract class Button {
     protected Image clickSprite;
 
     protected Image currentSprite;
+    protected int currentSpriteNum;
+    protected static int PLAIN = 0;
+    protected static int HOVER = 1;
+    protected static int CLICK = 2;
     
     protected int width;
     protected int height;
 
-    protected boolean pressed;
-    protected boolean released;
-
+    private boolean pressed;
+    private boolean released;
 
     public abstract void update(int x, int y, boolean mouseDown);
     public abstract void draw(Graphics g);
 
-    public void defaultDraw(Graphics g){
-        g.drawImage(currentSprite, x-(width/2), y-(height/2), width, height, null);
-    }
+    public static final int START_BUTTON = 0;
+
     public void defaultUpdate(int mousex, int mousey, boolean mouseDown){
         released = false;
         if (pressed && !mouseDown){
@@ -31,12 +35,15 @@ public abstract class Button {
         }
         if (!pressed){
             currentSprite = buttonSprite;
+            currentSpriteNum = 0;
         }
-        if ((x - width/2 < mousex && mousex < x + width/2 )&&(y - height/2 < mousey && mousey < y + height/2 )){
+        if ((x() - width/2 < mousex && mousex < x() + width/2 )&&(y() - height/2 < mousey && mousey < y() + height/2 )){
             currentSprite = hoverSprite;
+            currentSpriteNum = 1;
             if (mouseDown){
                 pressed = true;
                 currentSprite = clickSprite;
+                currentSpriteNum = 2;
             }
         }
     }
@@ -46,5 +53,11 @@ public abstract class Button {
     }
     public boolean isReleased(){
         return this.released;
+    }
+    public int y(){
+        return this.y;
+    }
+    public int x(){
+        return this.x;
     }
 }
