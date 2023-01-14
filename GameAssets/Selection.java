@@ -1,3 +1,4 @@
+package GameAssets;
 
 public class Selection {
     public static final int NONE = -1;

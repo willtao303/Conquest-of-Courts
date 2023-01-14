@@ -1,7 +1,6 @@
+package GameAssets;
 
 import java.util.LinkedList;
-
-import Containters.Point;
 
 public class WBroadsword extends Weapon{   
     WBroadsword(Player p){

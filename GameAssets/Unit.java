@@ -1,8 +1,8 @@
+package GameAssets;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import Containters.Point;
 
 public abstract class Unit {
     // referance variables

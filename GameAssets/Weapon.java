@@ -1,3 +1,4 @@
+package GameAssets;
 
 import java.util.LinkedList;
 

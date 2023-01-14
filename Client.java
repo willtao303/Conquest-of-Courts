@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.net.*;
 import java.util.LinkedList;
 import java.util.Queue;
+import GameAssets.*;
 
 public class Client {
     private final String LOCAL_HOST = "127.0.0.1";

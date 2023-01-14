@@ -1,3 +1,4 @@
+package GameAssets;
 
 public class EnemyManager {
     // hashmap containing units by {sector: unit[]} pairs

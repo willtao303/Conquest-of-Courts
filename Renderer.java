@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import GameAssets.*;
 
 public class Renderer {
     JFrame frame;

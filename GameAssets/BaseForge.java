@@ -1,7 +1,8 @@
-
+package GameAssets;
 import java.awt.Color;
 import java.awt.Graphics;
-import Containters.Point;
+
+
 public class BaseForge {
     Point pos;
     Resources resources;

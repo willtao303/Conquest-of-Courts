@@ -1,6 +1,4 @@
-
-import Containters.Point;
-
+package GameAssets;
 public abstract class UnitDefender extends Unit{
     UnitDefender(int x, int y, Map m, EnemyManager e) {
         super(x, y, m, e);

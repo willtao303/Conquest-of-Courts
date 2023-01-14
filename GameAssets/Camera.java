@@ -1,5 +1,4 @@
-
-import Containters.Point;
+package GameAssets;
 
 public class Camera {
     private int x, y;

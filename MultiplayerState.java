@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Color;
+import GameAssets.*;
 
 public class MultiplayerState extends State{
     Game game;
@@ -10,7 +11,7 @@ public class MultiplayerState extends State{
         game = new Game();
         game.setup(input);
         opponent = new Client();
-        opponent.setEnemyManager(game.enemyUnits);
+        opponent.setEnemyManager(game.getEnemyManager());
         opponent.setGame(game);
     }
 

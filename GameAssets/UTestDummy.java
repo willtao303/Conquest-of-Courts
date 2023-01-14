@@ -1,30 +1,36 @@
+package GameAssets;
 
 import java.awt.Graphics;
+
 import java.awt.Color;
 
-public class UKnight extends UnitDefender{
-    UKnight(int x, int y, Map m, EnemyManager e) {
-        super(x, y, m, e);
-        hp = maxHp = 100;
+public class UTestDummy extends Unit{
+
+    UTestDummy(int x, int y, Map m, EnemyManager e){
+        super(x,y,m,e);
+        hp = maxHp = 99;
         this.x = x;
         this.y = y;
-        width = 40;
-        height = 60;
-        speed = 3;
+        width = 35;
+        height = 45;
+        speed = 0;
     }
 
     @Override
     public void update() {
-        
+        if (hp < 0){
+            this.dead = true;
+        }
     }
 
-
+    @Override
+    public void move() {}
 
     @Override
     public void draw(int xOff, int yOff, Graphics g) {
         if (x + width/2 - xOff > 0 && x - width/2 - xOff < Consts.WINDOWWIDTH) {
             if (y + height/2 - yOff > 0 && y - height/2 - yOff < Consts.WINDOWHEIGHT) {
-                g.setColor(Color.RED);
+                g.setColor(Color.YELLOW);
                 g.fillRect((int)(x - width/2 -xOff), (int)(y - height/2-yOff), width, height);
                 if (selected){
                     g.setColor(Color.WHITE);
@@ -37,6 +43,11 @@ public class UKnight extends UnitDefender{
 
             }
         }
+        
+    }
+
+    @Override
+    protected void clearPath() {
     }
     
 }

@@ -1,3 +1,4 @@
+package GameAssets;
 
 public class Resources {
     public int coins = 0;

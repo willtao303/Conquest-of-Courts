@@ -1,3 +1,4 @@
+package GameAssets;
 
 import java.util.HashMap;
 import java.awt.event.KeyEvent;
@@ -33,7 +34,7 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
     private int mouseX = 0;
     private int mouseY = 0;
 
-    Input(){
+    public Input(){
         this.defualtKeybinds();
     }
 

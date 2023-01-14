@@ -1,6 +1,8 @@
+package GameAssets;
 
 import java.awt.Color;
 import java.awt.Graphics;
+
 public class Overlay {
     public static final int DEAD = -2;
     public static final int NONE = -1;

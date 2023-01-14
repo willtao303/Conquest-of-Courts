@@ -1,5 +1,5 @@
-
 import java.awt.Graphics;
+import GameAssets.*;
 
 public abstract class State {
     public final static int MAIN_MENU = 0;

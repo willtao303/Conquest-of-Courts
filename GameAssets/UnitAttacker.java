@@ -1,7 +1,6 @@
+package GameAssets;
 
 import java.util.LinkedList;
-
-import Containters.Point;
 
 public abstract class UnitAttacker  extends Unit{
 

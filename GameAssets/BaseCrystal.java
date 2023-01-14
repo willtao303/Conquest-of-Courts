@@ -1,7 +1,8 @@
-
+package GameAssets;
 import java.awt.Color;
 import java.awt.Graphics;
-import Containters.Point;
+
+
 public class BaseCrystal {
     private int maxHp = 1000, hp = maxHp;
     private final int width = 80, height = 150;

@@ -1,9 +1,9 @@
+package GameAssets;
 
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import Containters.Point;
 
 import java.awt.Color;
 

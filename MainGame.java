@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.Queue;
+import GameAssets.*;
 
 public class MainGame {
     Input input;

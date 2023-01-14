@@ -1,8 +1,7 @@
-
+package GameAssets;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import Containters.Point;
 public class AttackField {
     int dmg;
     int tickdmg = 0;

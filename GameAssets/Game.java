@@ -1,9 +1,9 @@
-import Containters.Point;
+package GameAssets;
+
 import java.awt.Graphics;
 import java.util.LinkedList;
 import Maps.MapPreset;
 import java.awt.Color;
-
 
 public class Game {
     public static String RED = "red";
@@ -29,6 +29,7 @@ public class Game {
     TowerSlot[] towers;
     BaseCrystal crystal;
 
+    public Game(){}
     public void setup(Input i){
         input = i;
         map.setup(MapPreset.SMALLMAP);
@@ -212,5 +213,9 @@ public class Game {
         for (AttackField a : attacks){
             a.draw(camera.anchorX(), camera.anchorY(),g);
         }
+    }
+
+    public EnemyManager getEnemyManager(){
+        return this.enemyUnits;
     }
 }

@@ -1,8 +1,8 @@
+package GameAssets;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
-import Containters.Point;
 import Maps.*;
 
 public class Map {

@@ -1,3 +1,4 @@
+package GameAssets;
 import java.awt.Color;
 public class TowerPreset {
     public static final int ARCHER = 0;

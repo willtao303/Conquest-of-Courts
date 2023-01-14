@@ -1,4 +1,4 @@
-
+package GameAssets;
 
 import java.awt.image.BufferedImage;
 
