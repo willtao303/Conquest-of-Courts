@@ -6,7 +6,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 
-public class Lobby {
+public class Room {
     private SlotTile red = new SlotTile(RED);
     private SlotTile blue = new SlotTile(BLUE);
     public static final int RED = -1;
@@ -15,7 +15,7 @@ public class Lobby {
     private ArrayList<SlotTile> spectators = new ArrayList<SlotTile>();
     private int size;
 
-    Lobby (int roomSize){
+    Room (int roomSize){
         size = roomSize;
         for (int i = 0; i < roomSize-2; i++){
             spectators.add(new SlotTile(i));
@@ -111,7 +111,6 @@ public class Lobby {
                 g.setColor(Color.DARK_GRAY);
                 g.fillRect(x, y, width, height);
             }
-
         }
     }
 }
