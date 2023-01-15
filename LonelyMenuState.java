@@ -1,11 +1,14 @@
 import java.awt.Graphics;
 
 import Components.*;
+import GameAssets.Consts;
 import GameAssets.Input;
 
 public class LonelyMenuState extends State{
     Button backButton = new ImageButton(150,150, Button.BACK_BUTTON);
-    Button campaign = new BasicButton(600, 120+400, 500, 800);
+    Button campaign = new BasicButton(Consts.WINDOWWIDTH/2 - 250 - 10, Consts.WINDOWHEIGHT/2, 500, 800);
+    Button sandbox = new BasicButton(Consts.WINDOWWIDTH/2 + 250 + 10, Consts.WINDOWHEIGHT/2 - 400 + 250, 500, 500-10);
+    Button tutorial = new BasicButton(Consts.WINDOWWIDTH/2 + 250 + 10, Consts.WINDOWHEIGHT/2 + 400 - 150, 500, 300-10);
     @Override
     public void start() {
         
@@ -15,9 +18,14 @@ public class LonelyMenuState extends State{
     public void run() {
         backButton.update(input.mousePosX(), input.mousePosY(), input.mouseIsDown(Input.LMB));
         campaign.update(input.mousePosX(), input.mousePosY(), input.mouseIsDown(Input.LMB));
+        sandbox.update(input.mousePosX(), input.mousePosY(), input.mouseIsDown(Input.LMB));
+        tutorial.update(input.mousePosX(), input.mousePosY(), input.mouseIsDown(Input.LMB));
 
-        if (backButton.isDown()){
+        if (backButton.isReleased()){
             handler.changeState(MAINMENU);
+        }
+        if (sandbox.isReleased()){
+            handler.changeState(SANDBOX);
         }
     }
 
@@ -26,6 +34,8 @@ public class LonelyMenuState extends State{
         // TODO Auto-generated method stub
         backButton.draw(g);
         campaign.draw(g);
+        sandbox.draw(g);
+        tutorial.draw(g);
         
     }
 
