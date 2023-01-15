@@ -9,6 +9,11 @@ public abstract class Button {
     protected Image buttonSprite;
     protected Image hoverSprite;
     protected Image clickSprite;
+    public static final int START_BUTTON = 0;
+    public static final int MULTIPLAYER_BUTTON = 1;
+    public static final int SETTINGS_BUTTON = 2;
+    public static final int BACK_BUTTON = 3;
+    public static final int EXIT_BUTTON = 4;
 
     protected Image currentSprite;
     protected int currentSpriteNum;
@@ -25,7 +30,7 @@ public abstract class Button {
     public abstract void update(int x, int y, boolean mouseDown);
     public abstract void draw(Graphics g);
 
-    public static final int START_BUTTON = 0;
+    protected Button(){}
 
     public void defaultUpdate(int mousex, int mousey, boolean mouseDown){
         released = false;

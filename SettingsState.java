@@ -13,6 +13,7 @@ public class SettingsState extends State{
     int scroll = 0;
     Button generalSettingsButton = new BasicButton(Consts.WINDOWWIDTH/2-450-40, 300, 80, 80);
     Button keybindSettingsButton = new BasicButton(Consts.WINDOWWIDTH/2-450-40, 380, 80, 80);
+    Button backButton = new ImageButton(100, 100, Button.BACK_BUTTON);
 
     ScrollingBasicButton[] generalButtons = {};
     ScrollingBasicButton[] keyBindButtons = {
@@ -30,13 +31,14 @@ public class SettingsState extends State{
     ScrollingBasicButton[] currentButtons = generalButtons;
 
     @Override
-    public void start(Object[] args) {
+    public void start() {
     }
 
     @Override
     public void run() {
         generalSettingsButton.update(input.mousePosX(), input.mousePosY(), input.mouseIsDown(Input.LMB));
         keybindSettingsButton.update(input.mousePosX(), input.mousePosY(), input.mouseIsDown(Input.LMB));
+        backButton.update(input.mousePosX(), input.mousePosY(), input.mouseIsDown(Input.LMB));
 
         if (generalSettingsButton.isReleased()){
             tab = GENERAL;
@@ -44,6 +46,8 @@ public class SettingsState extends State{
         } else if (keybindSettingsButton.isReleased()){
             tab = KEYBINDS;
             currentButtons = keyBindButtons;
+        } else if (backButton.isReleased()){
+            handler.changeState(MAINMENU);
         }
 
         if (input.scroll() != 0){
@@ -65,6 +69,7 @@ public class SettingsState extends State{
     public void draw(Graphics g) {
         generalSettingsButton.draw(g);
         keybindSettingsButton.draw(g);
+        backButton.draw(g);
         g.setColor(Color.WHITE);
         g.fillRect(Consts.WINDOWWIDTH/2-450, 0, 900, Consts.WINDOWHEIGHT);
         g.setColor(Color.BLACK);
@@ -78,8 +83,7 @@ public class SettingsState extends State{
     }
 
     @Override
-    public Object[] end() {
-        return null;
+    public void end() {
     }
     
 }

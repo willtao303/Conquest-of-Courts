@@ -6,18 +6,20 @@ import Components.TextField;
 import GameAssets.*;
 
 public class MainGame {
-    Input input;
-    Renderer renderer;
-    String username;
+    private Input input;
+    private Renderer renderer;
+    private Client client;
     private boolean running = true;
 
     State[] states = new State[]{
         new MainMenuState(), 
         new UsernameState(),
+        new LonelyMenuState(),
+        null,//new CampaignState(),
         new SandboxState(),
-        null,// singleplayer
+        null,//new singleplayerthingyState(),
         new MultiplayerState(),
-        new LobbyTestState(),
+        new LobbyState(),
         new SettingsState()
     };
     int currentState = 0;
@@ -26,7 +28,7 @@ public class MainGame {
     public void setup(Input i, Renderer r){
         input = i;
         renderer = r;
-        states[currentState].start(null);
+        states[currentState].start();
         for (State state: states){
             if (state == null){
                 continue;
@@ -54,6 +56,12 @@ public class MainGame {
             states[state] = new MainMenuState();
         }
     }
+    public Client getClient(){
+        return client;
+    }
+    public void setClient(Client c){
+        client = c;
+    }
 
     public void addTextbox(TextField textfield){
         renderer.addTextField(textfield);
@@ -67,9 +75,9 @@ public class MainGame {
     }
 
     private void changeState(int newState, boolean a){
-        Object[] args = states[currentState].end();
+        states[currentState].end();
         currentState = newState;
-        states[currentState].start(args);
+        states[currentState].start();
     }
 
     public void draw(Graphics g) {

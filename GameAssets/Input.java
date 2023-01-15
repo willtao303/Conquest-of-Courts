@@ -47,6 +47,7 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener, M
         for (int i = 0; i < 5; i ++){
             mouseTap[i] = 0;
         }
+        keyTapped = -1;
         scroll = 0;
     }
     public int scroll(){
@@ -64,7 +65,6 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener, M
 
     public boolean keyIsTapped(int key){
         if (keyTapped == key){
-            keyTapped = -1;
             return true;
         }
         return false;

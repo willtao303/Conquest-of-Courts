@@ -5,7 +5,7 @@ public class SandboxState extends State{
     Game game;
 
     @Override
-    public void start(Object[] args) {
+    public void start() {
         game = new Game();
         game.setup(input);
     }
@@ -22,8 +22,7 @@ public class SandboxState extends State{
     }
 
     @Override
-    public Object[] end() {
-        return null;
+    public void end() {
     }
     
 }
