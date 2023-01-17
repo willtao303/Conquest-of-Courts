@@ -68,4 +68,14 @@ public class Commands{
      *  server -> client: 
      *      - no args
      */
+
+
+    public static final String GAME_UNITS = "gameunits";
+    /*
+     *  client -> server: N/A
+     * 
+     *  server -> client: 
+     *      - no args
+     */
+
 }

@@ -91,18 +91,22 @@ public class TowerSlot {
         return x-SIZE/2 < mouseX && mouseX < x+SIZE/2 && y-SIZE/2 < mouseY  && mouseY < y+SIZE/2;
     }
     public boolean buttonClicked(int mouseX, int mouseY){
+        int [] upgrades;
+        if (tower == null){
+            upgrades = INITIAL_UPGRADES;
+        } else {
+            upgrades = tower.UPGRADES;
+        }
         int buttonClicked = 0;
-        for (int i = 0; i < BUTTON_OFFSETS.length; i++){
+        for (int i = 0; i < upgrades.length; i++){
             if (x+BUTTON_OFFSETS[i][0]-PD < mouseX && mouseX < x+BUTTON_OFFSETS[i][0]+BUTTON_DIAM+PD && y+BUTTON_OFFSETS[i][1]-PD < mouseY && mouseY < y+BUTTON_OFFSETS[i][1]+BUTTON_DIAM+PD){
                 break;
             }
             buttonClicked++;
         }
-        if (buttonClicked != BUTTON_OFFSETS.length){
-            if (tower == null){
-                tower = new Tower(x, y, INITIAL_UPGRADES[buttonClicked]);
-            } else {
-                tower = new Tower(x, y, tower.UPGRADES[buttonClicked]);
+        if (buttonClicked != upgrades.length){
+            if (upgrades[buttonClicked] != -1){
+                tower = new Tower(x, y, upgrades[buttonClicked]);
             }
             return true;
         }

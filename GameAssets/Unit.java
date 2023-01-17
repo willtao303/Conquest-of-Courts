@@ -19,6 +19,8 @@ public abstract class Unit {
     BufferedImage sprites;
     boolean dead;
 
+    int id;
+
     protected boolean selected = false;
 
     Unit(int x, int y, Map m, EnemyManager e){
@@ -73,6 +75,12 @@ public abstract class Unit {
     }
     public void unfocus(){
         this.selected = false;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
+    public int getId(){
+        return id;
     }
     public boolean isSelected(){
         return this.selected;

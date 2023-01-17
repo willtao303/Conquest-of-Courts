@@ -183,4 +183,9 @@ public class Player {
     public int respawningIn(){
         return dead/30;
     }
+
+    public String toString(){
+        String output = " # -1/" + (int)x + "/" + (int)y + "/" + hp;
+        return output;
+    }
 }

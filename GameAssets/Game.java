@@ -144,7 +144,7 @@ public class Game {
                 
                 if (input.mouseIsTapped(Input.RMB)){
                     if (selection.object == Selection.NONE){
-                        System.out.println(input.mousePosX()+camera.anchorX()+", "+(input.mousePosY()+camera.anchorY()));
+                        System.out.println("{"+input.mousePosX()+camera.anchorX()+", "+(input.mousePosY()+camera.anchorY())+"},");
                         if (Math.random() < 0.5){
                             playerUnits.spawn(new UTestDummy(input.mousePosX()+camera.anchorX(), input.mousePosY()+camera.anchorY(), map, null));
                         } else {
@@ -179,6 +179,7 @@ public class Game {
             player.draw(camera.anchorX(), camera.anchorY(), g);
         }
         playerUnits.draw(g);
+        enemyUnits.draw(camera, g);
         for (TowerSlot t: towers){
             if (camera.onScreen(t.x(), t.y(), TowerSlot.SIZE)){
                 t.draw(camera.anchorX(), camera.anchorY(), g);
@@ -218,5 +219,16 @@ public class Game {
 
     public EnemyManager getEnemyManager(){
         return this.enemyUnits;
+    }
+
+    public UnitManager getUnits(){
+        return this.playerUnits;
+    }
+    
+    public Camera getCamera(){
+        return this.camera;
+    }
+    public Player getPlayer() {
+        return this.player;
     }
 }

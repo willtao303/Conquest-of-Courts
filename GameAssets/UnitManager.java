@@ -11,7 +11,7 @@ public class UnitManager {
     EnemyManager enemies;
     LinkedList<AttackField> atks;
 
-    private int idCounter = 0; // assuming we will not have over 2^
+    private int idCounter = 0; // assuming we will not have over 2^32 units spawned in a single game
     LinkedList<Unit> allUnits = new LinkedList<Unit>();
     HashMap<Integer, Unit> unitById = new HashMap<Integer, Unit>();
     LinkedList<UnitAttacker> attackingUnits = new LinkedList<UnitAttacker>();
@@ -38,6 +38,12 @@ public class UnitManager {
             u.move();
             if (u.dead){
                 allUnits.remove(u);
+                unitById.remove(u.getId());
+                if (u instanceof UnitDefender){
+                    defendingUnits.remove(u);
+                } else if (u instanceof UnitAttacker){
+                    attackingUnits.remove(u);
+                }
                 break;
             }
         }
@@ -45,6 +51,7 @@ public class UnitManager {
     public void spawn(Unit u){
         allUnits.add(u);
         unitById.put(idCounter, u);
+        u.setId(idCounter);
         idCounter++;
         if (u instanceof UnitAttacker){
             attackingUnits.add((UnitAttacker)u);
@@ -66,5 +73,24 @@ public class UnitManager {
                 u.draw(cam.anchorX(), cam.anchorY(), g);
             }
         }
+    }
+
+    public String toString(){
+        String output = " #";
+        for(Unit u: attackingUnits){
+            output = output + " " + u.getId() + "/" + (int)u.x() + "/" + (int)u.y() + "/" + u.hp; // + "/" + sprite + "/" + frameNum;
+        }
+        if (attackingUnits.size() == 0){
+            output = output + " none";
+        }
+        output = output + " #";
+        for(Unit u: defendingUnits){
+            output = output + " " + u.getId() + "/" + (int)u.x() + "/" + (int)u.y() + "/" + u.hp; // + "/" + sprite + "/" + frameNum;
+        }
+        if (defendingUnits.size() == 0){
+            output = output + " none";
+        }
+
+        return output;
     }
 }
