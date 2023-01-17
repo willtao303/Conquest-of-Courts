@@ -10,11 +10,6 @@ public class SmallMap extends MapPreset{
         } catch (Exception e) {}
         width = 3500;
         height = 2300;
-        spawnRX = 500;
-        spawnRY = 1800;
-        crystalRX = 300;
-        crystalRY = 2000;
-
         boundries = new int[][][]{
             {{0, 0}, {0, 866}, {173, 894}, {779, 662}, {1118, 389}, {1600, 239}, {1837, 0}},
             {{799, 1024}, {664, 1289}, {677, 1740}, {887, 1816}, {966, 1726}, {1112, 1363}, {1378, 1220}, {1433, 1114}, {904, 975}},
@@ -23,9 +18,15 @@ public class SmallMap extends MapPreset{
             {{715, 2300}, {983, 2184}, {1251, 2298}},
             {{1692, 2297}, {1924, 2067}, {2410, 1909}, {2748, 1634}, {3364, 1402}, {3500, 1433}, {3500, 2300}}
         };
-        sectorsVertical = 3;
-        sectorsHorizontal = 3;
-        towers = new int[][]{
+        //sectorsVertical = 3;
+        //sectorsHorizontal = 3;
+
+
+        spawnRX = 500;
+        spawnRY = 1800;
+        crystalRX = 300;
+        crystalRY = 2000;
+        towersR = new int[][]{
             {0,0},
             {196, 906},
             {659, 1286},
@@ -48,6 +49,15 @@ public class SmallMap extends MapPreset{
             {2152, 1998},
             {1821, 2166}
         };
+        
+        spawnBX = width - 500;
+        spawnBY = height - 1800;
+        crystalBX = width - 300;
+        crystalBY = height - 2000;
+        towersB = new int[][]{
+            {0,0}
+        };
+        
         /*sectors = new int [][][]{
             {{678, 1735},{-2, 2070}, {-3, 1290}},
             {{671, 1294}, {-4, 1292}, {678, 1741}},

@@ -6,8 +6,9 @@ import Maps.MapPreset;
 import java.awt.Color;
 
 public class Game {
-    public static String RED = "red";
-    public static String BLUE = "blue";
+    public static int SPECTATOR = 0;
+    public static int RED = -1;
+    public static int BLUE = -2;
     Input input;
 
     Map map = new Map();
@@ -30,17 +31,17 @@ public class Game {
     BaseCrystal crystal;
 
     public Game(){}
-    public void setup(Input i){
+    public void setup(Input i, int side){
         input = i;
         map.setup(MapPreset.SMALLMAP);
-        player.setup(map.getRedSpawnPoint(), RED, map);
-        crystal = new BaseCrystal(map.getRedCrysalPoint());
+        player.setup(map.getSpawnPoint(side), RED, map);
+        crystal = new BaseCrystal(map.getCrysalPoint(side));
         camera.setup(this);
-        camera.moveTo(map.getRedSpawnPoint());
+        camera.moveTo(map.getSpawnPoint(side));
         overlay.addResoures(this);
-        towers = new TowerSlot[map.getPresetMap().towers.length];
+        towers = new TowerSlot[map.getTowers(side).length];
         int j = 0;
-        for (int[] towerCoords: map.getPresetMap().towers){
+        for (int[] towerCoords: map.getTowers(side)){
             towers[j] = new TowerSlot(towerCoords[0], towerCoords[1]);
             j++;
         }

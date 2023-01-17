@@ -7,7 +7,7 @@ public class SandboxState extends State{
     @Override
     public void start() {
         game = new Game();
-        game.setup(input);
+        game.setup(input, Game.BLUE);
     }
 
     @Override
@@ -18,7 +18,6 @@ public class SandboxState extends State{
     @Override
     public void draw(Graphics g) {
         game.render(g);
-        
     }
 
     @Override

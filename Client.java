@@ -22,6 +22,8 @@ public class Client{
     private PrintWriter output;
     private BufferedReader input;
     private BlockingQueue<String> messages = new LinkedBlockingQueue<String>();
+
+    private int side;
     
 
     private boolean connected = false;
@@ -128,7 +130,7 @@ public class Client{
             try{
                 while (true){
                     String msg = input.readLine();
-                    System.out.println(msg);
+                    //System.out.println(msg);
                     if (msg != null){
                         messages.offer(msg);
                     }
@@ -142,5 +144,12 @@ public class Client{
             }
             alive = false;
         }
+    }
+
+    public int getSide(){
+        return side;
+    }
+    public void setSide(int side){
+        this.side = side;
     }
 }

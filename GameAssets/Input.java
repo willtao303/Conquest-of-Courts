@@ -1,13 +1,7 @@
 package GameAssets;
 
-import java.util.HashMap;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
+import java.util.*;
+import java.awt.event.*;
 
 public class Input implements KeyListener, MouseMotionListener, MouseListener, MouseWheelListener {
     public static final char UP   = 0;

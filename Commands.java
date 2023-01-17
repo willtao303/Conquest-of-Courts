@@ -25,6 +25,14 @@ public class Commands{
      *      - latest message
      * 
      */
+    public static final String USER_SIDE = "moveside";
+    /*
+     *  client -> server:
+     *      - which side they are moving to
+     *  
+     *  server -> client:
+     *      - which side they are moving to
+     */
 
     public static final String USER_MOVE = "moveslot";
     /*
@@ -33,7 +41,6 @@ public class Commands{
      *  
      *  server -> client:
      *      - which slot they are moving to
-     *      - if spectator, also which index;
      */
 
     public static final String USER_RQMOVE = "rqmoveslot"; // request move
@@ -54,5 +61,11 @@ public class Commands{
      *  server -> client: N/A
      */
 
-
+    public static final String START = "start";
+    /*
+     *  client -> server: N/A
+     * 
+     *  server -> client: 
+     *      - no args
+     */
 }

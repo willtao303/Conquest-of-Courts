@@ -17,11 +17,26 @@ public class Map {
         }
     }
 
-    public Point getRedSpawnPoint(){
-        return new Point(map.spawnRX, map.spawnRY);
+    public Point getSpawnPoint(int side){
+        if (side == Game.RED){
+            return new Point(map.spawnRX, map.spawnRY);
+        } else {
+            return new Point(map.spawnBX, map.spawnBY);
+        }
     }
-    public Point getRedCrysalPoint() {
-        return new Point(map.crystalRX, map.crystalRY);
+    public Point getCrysalPoint(int side) {
+        if (side == Game.RED){
+            return new Point(map.crystalRX, map.crystalRY);
+        } else {
+            return new Point(map.crystalBX, map.crystalBY);
+        }
+    }
+    public int[][] getTowers(int side){
+        if (side == Game.RED){
+            return map.towersR;
+        } else{
+            return map.towersB;
+        }
     }
     public void draw (int topLeftX, int topLeftY, Graphics g){
         int xdraw = 0;

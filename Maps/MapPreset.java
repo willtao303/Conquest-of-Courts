@@ -8,17 +8,14 @@ public class MapPreset {
     public String name;
     public BufferedImage image;
 
-    public int spawnRX;
-    public int spawnRY;
-    public int crystalRX;
-    public int crystalRY;
-    
     public int [][][] boundries;
-    //public int [][][] sectors;
-    //public int [][] sectorsAdjacency;
     public int sectorsVertical;
     public int sectorsHorizontal;
 
-    public int [][] towers;
-
+    public int spawnRX, spawnRY;
+    public int crystalRX, crystalRY;
+    public int [][] towersR;
+    public int spawnBX, spawnBY;
+    public int crystalBX, crystalBY;
+    public int [][] towersB;
 }

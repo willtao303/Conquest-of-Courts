@@ -10,6 +10,7 @@ public class TextField implements KeyListener{
     private HashSet<Character> whitelist = new HashSet<Character>();
     private int maxLen = -1;
     private boolean focused;
+    private boolean capslock = false;
 
     public void excludeChar(char[] chars){
         for (char c: chars){
@@ -32,6 +33,9 @@ public class TextField implements KeyListener{
             blacklist.remove(chr);
         }
         whitelist.add(chr);
+    }
+    public void capslock(){
+        this.capslock = true;
     }
     public void defaultIncludeChar(){
         for (char i = 'a'; i < 'z'+1; i++){
@@ -68,7 +72,15 @@ public class TextField implements KeyListener{
             } else {
                 if (content.length() < maxLen || maxLen == -1){
                     if (!blacklist.contains(e.getKeyChar()) && (whitelist.isEmpty() || whitelist.contains(e.getKeyChar()))){
-                        content = content+e.getKeyChar();
+                        if (capslock){
+                            if ('a' <= e.getKeyChar() && e.getKeyChar() <= 'z'){
+                                content = content+(char)(e.getKeyChar() - 'a' + 'A');
+                            } else {
+                                content = content+e.getKeyChar();
+                            }
+                        } else {
+                            content = content+e.getKeyChar();
+                        }
                     }
                 }
             }

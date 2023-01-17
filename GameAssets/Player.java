@@ -33,7 +33,7 @@ public class Player {
     Player(){
     }
 
-    public void setup(Point respawn, String side, Map map){
+    public void setup(Point respawn, int side, Map map){
         if (side == Game.RED){
 
         } else if (side == Game.BLUE){

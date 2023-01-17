@@ -27,30 +27,47 @@ public abstract class Button {
     private boolean pressed;
     private boolean released;
 
+    private boolean lock = false;
+
     public abstract void update(int x, int y, boolean mouseDown);
     public abstract void draw(Graphics g);
 
     protected Button(){}
 
     public void defaultUpdate(int mousex, int mousey, boolean mouseDown){
-        released = false;
-        if (pressed && !mouseDown){
-            released = true;
-            pressed = false;
-        }
-        if (!pressed){
-            currentSprite = buttonSprite;
-            currentSpriteNum = 0;
-        }
-        if ((x() - width/2 < mousex && mousex < x() + width/2 )&&(y() - height/2 < mousey && mousey < y() + height/2 )){
-            currentSprite = hoverSprite;
-            currentSpriteNum = 1;
-            if (mouseDown){
-                pressed = true;
-                currentSprite = clickSprite;
-                currentSpriteNum = 2;
+        if (!lock){
+            released = false;
+            if (pressed && !mouseDown){
+                released = true;
+                pressed = false;
+            }
+            if (!pressed){
+                currentSprite = buttonSprite;
+                currentSpriteNum = 0;
+            }
+            if ((x() - width/2 < mousex && mousex < x() + width/2 )&&(y() - height/2 < mousey && mousey < y() + height/2 )){
+                currentSprite = hoverSprite;
+                currentSpriteNum = 1;
+                if (mouseDown){
+                    pressed = true;
+                    currentSprite = clickSprite;
+                    currentSpriteNum = 2;
+                }
             }
         }
+    }
+
+    public void lock(){
+        this.lock = true;
+        pressed = false;
+        released = false;
+        currentSprite = hoverSprite;
+    }
+    public void unlock(){
+        this.lock = false;
+    }
+    public boolean locked(){
+        return lock;
     }
 
     public boolean isDown(){
