@@ -30,7 +30,7 @@ public class WBroadsword extends Weapon{
         Point b = new Point((int)(player.x() + bdist*Math.cos(Math.toRadians(angle-bdir))), player.y() - (int)(-bdist*Math.sin(Math.toRadians(angle-bdir))));
         Point c = new Point((int)(player.x() + bdist*Math.cos(Math.toRadians(angle+bdir))), player.y() - (int)(-bdist*Math.sin(Math.toRadians(angle+bdir))));
         LinkedList<AttackField> output = new LinkedList<AttackField>();
-        output.add(new AttackField((int)((player.atk+atk)*cd), a, b, c));
+        output.add(new AttackFieldTriangle((int)((player.atk+atk)*cd), a, b, c));
         return output;
     }
 

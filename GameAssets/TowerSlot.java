@@ -1,6 +1,7 @@
 package GameAssets;
 
 import java.awt.Graphics;
+import java.util.LinkedList;
 import java.awt.Color;
 
 public class TowerSlot {
@@ -34,6 +35,22 @@ public class TowerSlot {
         this.y = y;
     }
 
+    public void update(LinkedList<AttackField> attacks){
+        if (tower != null){
+            tower.update();
+            if (tower.isShootingType()){
+                if (enemies.attackingEnemies != null){
+                    for (Enemy e: enemies.attackingEnemies){
+                        if (tower.blindRange < tower.distTo(e.x, e.y) && tower.distTo(e.x, e.y) < tower.range){
+                            if (tower.shootCooldown() <= 0){
+                                attacks.add(tower.shoot(e.x, e.y));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     public void draw(int offsetX, int offsetY, Graphics g){
         if (focused){
@@ -118,5 +135,9 @@ public class TowerSlot {
     }
     public int y(){
         return y;
+    }
+
+    public void setEnemies(EnemyManager e){
+        this.enemies = e;
     }
 }

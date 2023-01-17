@@ -78,4 +78,9 @@ public class Commands{
      *      - no args
      */
 
+     public static final String GAME_ATKS = "gameatks";
+    /*
+     *  client -> server: 
+     */
+
 }

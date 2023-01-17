@@ -68,6 +68,10 @@ public class Client{
         return null;
     }
 
+    public int unreadMessages(){
+        return messages.size();
+    }
+
     public void sendMessage(String msg){
         output.println(msg);
         output.flush();

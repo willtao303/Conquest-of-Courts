@@ -18,6 +18,12 @@ public class Point {
     public double distTo(int x, int y){
         return Math.sqrt((this.x-x)*(this.x-x) + (this.y-y)*(this.y-y));
     }
+    public double dirTo(Point other){
+        return Math.toDegrees(Math.atan2((other.x-this.x), (other.y-this.y)))+270;
+    }
+    public double dirTo(int x, int y){
+        return Math.toDegrees(Math.atan2((x-this.x), (y-this.y)))+270;
+    }
     public String toString(){
         return "{"+x + ", " + y+"}";
     }

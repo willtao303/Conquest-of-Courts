@@ -13,6 +13,7 @@ public class Tower {
     protected int hp, maxHp;
 
     protected int range;
+    protected int blindRange;
 
     public static final int NONE = -1;
 
@@ -49,18 +50,25 @@ public class Tower {
         this(x, y, preset);
         this.hp = hp;
     }
-    public void update(EnemyManager e, UnitManager u){
-
+    public void update(){
+        cooldownCounter--;
     }
     public void draw(int x, int y, int size, Graphics g) {
         g.setColor(TowerPreset.COLOR[preset]);
         g.fillRect(x, y, size, size);
     }
 
-    public void shoot(){
+    public AttackFieldBullet shoot(int x, int y){
         if (projectile != -1){
-
+            cooldownCounter = cooldown;
+            Point start = new Point(this.x, this.y);
+            double dir = start.dirTo(x, y);
+            return new AttackFieldBullet(dmg, start, (int)dir, 15, (int)(range*1.2));
         }
+        return null;
+    }
+    public int shootCooldown(){
+        return cooldownCounter;
     }
     public void spawn(){
         if (unitType != -1){
@@ -76,5 +84,13 @@ public class Tower {
     }
     public int distTo(int x, int y){
         return (int)Math.sqrt((this.x - x)*(this.x - x) + (this.y - y)*(this.y - y));
+    }
+
+    public boolean isShootingType(){
+        return projectile != -1;
+    }
+
+    public boolean isSpawningType(){
+        return unitType != -1;
     }
 }

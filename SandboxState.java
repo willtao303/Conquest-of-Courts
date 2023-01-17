@@ -20,7 +20,7 @@ public class SandboxState extends State{
         if (input.mouseIsTapped(Input.RMB)){
             defenders.add("1/" + (input.mousePosX()+game.getCamera().anchorX()) + "/" + (input.mousePosY()+game.getCamera().anchorY()) + "/" + 100);
         }
-        enemies.setDefenders(defenders.toArray(new String[defenders.size()]));
+        enemies.setAttackers(defenders.toArray(new String[defenders.size()]));
     }
 
     @Override

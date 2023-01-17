@@ -9,7 +9,6 @@ public class UnitManager {
     // referance vars
     private Camera cam;
     EnemyManager enemies;
-    LinkedList<AttackField> atks;
 
     private int idCounter = 0; // assuming we will not have over 2^32 units spawned in a single game
     LinkedList<Unit> allUnits = new LinkedList<Unit>();
@@ -17,22 +16,17 @@ public class UnitManager {
     LinkedList<UnitAttacker> attackingUnits = new LinkedList<UnitAttacker>();
     LinkedList<UnitDefender> defendingUnits = new LinkedList<UnitDefender>();
 
-    public void setReferances(Camera c, EnemyManager e, LinkedList<AttackField> a){
+    public void setReferances(Camera c, EnemyManager e){
         this.cam = c;
         this.enemies = e;
-        this.atks = a;
     }
     public void update(){
-        for (AttackField a: atks){
-            if (a.tickcounter == 0){
-                for (Unit u: allUnits){
-                    u.collides(a);
-                }
-            }
-            else;
-            a.tickcounter++;
-        }
         // TODO split this into updating by attacking units and defending units
+        for (AttackField a: enemies.attacks()){
+            for (Unit u: allUnits){
+                u.collides(a);
+            }
+        }
         for (Unit u: allUnits){
             u.update();
             u.move();

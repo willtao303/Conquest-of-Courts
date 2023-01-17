@@ -7,11 +7,15 @@ public class EnemyManager {
     Enemy player;
     Enemy[] defendingEnemies;
     Enemy[] attackingEnemies;
+    private AttackField[] attacks;
 
     public void setPlayer(String args){
         player = new Enemy(args);
         player.width = 55;
         player.height = 90;
+    }
+    public void updateAttacks(){
+        attacks = null;
     }
 
     public void setAttackers(String[] args){
@@ -25,6 +29,24 @@ public class EnemyManager {
         defendingEnemies = new Enemy[args.length];
         for (int i = 0; i < args.length; i ++){
             defendingEnemies[i] = new Enemy(args[i]);
+        }
+    }
+
+
+    public void setAttacks(String[] args){
+        attacks = new AttackField[args.length];
+        for (int i = 0; i < args.length; i ++){
+            String[] params = args[i].split("/");
+            if (params[0].equals("1")){
+                attacks[i] = new AttackFieldPoint(Integer.valueOf(params[3]), Integer.valueOf(params[1]),Integer.valueOf(params[2]));
+            } else if (params[0].equals("3")){
+                attacks[i] = new AttackFieldTriangle(
+                    Integer.valueOf(params[7]), 
+                    new Point(Integer.valueOf(params[1]), Integer.valueOf(params[2])),
+                    new Point(Integer.valueOf(params[3]), Integer.valueOf(params[4])),
+                    new Point(Integer.valueOf(params[5]),Integer.valueOf(params[6]))
+                );
+            }
         }
     }
 
@@ -47,6 +69,13 @@ public class EnemyManager {
                 }
             }
         }
+    }
+
+    public AttackField[] attacks(){
+        if (attacks == null){
+            return new AttackField[]{};
+        }
+        return attacks;
     }
     
 }

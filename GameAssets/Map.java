@@ -57,7 +57,7 @@ public class Map {
         if (topLeftY + Consts.WINDOWHEIGHT >= map.height){
             heightdraw =  map.height - topLeftY ;
         }try{
-        g.drawImage(map.image.getSubimage(topLeftX/Consts.PIXELRARIO, topLeftY/Consts.PIXELRARIO, (widthdraw/Consts.PIXELRARIO), (heightdraw/Consts.PIXELRARIO)), xdraw, ydraw, widthdraw, heightdraw,null);
+        g.drawImage(map.image.getSubimage((topLeftX-1)/Consts.PIXELRARIO, (topLeftY-1)/Consts.PIXELRARIO, (widthdraw/Consts.PIXELRARIO), (heightdraw/Consts.PIXELRARIO)), xdraw, ydraw, widthdraw, heightdraw,null);
         }catch(Exception e){}
     }
 

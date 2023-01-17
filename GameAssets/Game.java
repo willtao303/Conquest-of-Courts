@@ -43,9 +43,10 @@ public class Game {
         int j = 0;
         for (int[] towerCoords: map.getTowers(side)){
             towers[j] = new TowerSlot(towerCoords[0], towerCoords[1]);
+            towers[j].setEnemies(enemyUnits);
             j++;
         }
-        playerUnits.setReferances(camera, enemyUnits, attacks);
+        playerUnits.setReferances(camera, enemyUnits);
     }
 
 
@@ -57,12 +58,22 @@ public class Game {
          */
         player.update();
         for (AttackField a: attacks){
-            if (a.ticks < a.tickcounter){
+            if (a.dead()){
                 attacks.remove(a);
+                break;
+            }
+        }
+        for (AttackField a: attacks){
+            a.update();
+            if (a instanceof AttackFieldBullet){
+                ((AttackFieldBullet)a).collidesWall(map);
             }
         }
         playerUnits.update();
-
+        
+        for (TowerSlot t: towers){
+            t.update(attacks);
+        }
 
         if (player.isDead()){
             this.playerFocus = false;
@@ -169,6 +180,8 @@ public class Game {
                 }
             }
         }
+
+        enemyUnits.updateAttacks();
     }
     Color BgNullColor = new Color(66, 60, 77);
     public void render(Graphics g){
@@ -215,6 +228,9 @@ public class Game {
         for (AttackField a : attacks){
             a.draw(camera.anchorX(), camera.anchorY(),g);
         }
+        for (AttackField a: enemyUnits.attacks()){
+            a.draw(camera.anchorX(), camera.anchorY(),g);
+        }
     }
 
     public EnemyManager getEnemyManager(){
@@ -230,5 +246,12 @@ public class Game {
     }
     public Player getPlayer() {
         return this.player;
+    }
+    public String attacksToString(){
+        String output = "";
+        for (AttackField a: attacks){
+            output = output + " " + a.toString();
+        }
+        return output;
     }
 }

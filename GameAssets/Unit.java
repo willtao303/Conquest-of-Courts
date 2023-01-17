@@ -35,7 +35,7 @@ public abstract class Unit {
     public abstract void draw(int xOff, int yOff, Graphics g);
     public void collides(AttackField a){
         if (a.hitUnit(this)){
-            this.hp -= a.dmg;
+            this.hp -= a.dmg();
         }
     }
 

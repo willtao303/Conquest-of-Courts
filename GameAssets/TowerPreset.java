@@ -11,10 +11,10 @@ public class TowerPreset {
     public static int[][] STATS = {
         { // ARCHER
             120, // maxHp
-            200, // range
+            1000, // range
             Tower.PROJECTILE, // shoot type
             Tower.NONE, // spawn type
-            20, // dmg
+            15, // dmg
             30, // cooldown
             2, // number of upgrades
             150 // cost
@@ -44,7 +44,7 @@ public class TowerPreset {
             200, // range
             Tower.DRAIN, // shoot type
             Tower.NONE, // spawn type
-            20, // dmg
+            1, // dmg
             30, // cooldown
             2, // number of upgrades
             150 // cost
