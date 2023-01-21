@@ -30,6 +30,7 @@ public class MainGame {
         input = i;
         renderer = r;
         states[currentState].start();
+        chat = new ChatRoom();
         for (State state: states){
             if (state == null){
                 continue;

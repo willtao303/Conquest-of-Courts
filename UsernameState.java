@@ -7,10 +7,13 @@ import Components.*;
 
 public class UsernameState extends State{
     TextField inputField = new TextField();
-    private int inputFieldW = 303;
+    private int inputFieldW = 505;
     private int inputFieldH = 40;
 
     private Button back = new ImageButton(100, 100, Button.BACK_BUTTON);
+    private Button enter = new BasicButton(ScreenConsts.WINDOWWIDTH/2 + 150 + ((505/2)-202) + 30, ScreenConsts.WINDOWHEIGHT/2 + 7, 300, inputFieldH+14, "ENTER");
+    private int blinkCounter = 15;
+    private String error = "";
 
     
     Client client;
@@ -28,12 +31,20 @@ public class UsernameState extends State{
     @Override
     public void run() {
         
+        enter.update(input.mousePosX(), input.mousePosY(), input.mouseIsDown(Input.LMB));
         back.update(input.mousePosX(), input.mousePosY(), input.mouseIsDown(Input.LMB));
         if (!client.connected()){
             client.connect();
         } else {
-            if (input.keyIsTapped(Input.SEND)){
-                client.sendMessage(Commands.NAME + " " + inputField.content());
+            
+            if (input.keyIsTapped(Input.SEND) || enter.isReleased()){
+                if (inputField.content().equals("")){
+                    error = "Please enter a name!";
+                } else {
+                    client.sendMessage(Commands.NAME + " " + inputField.content());
+                }
+            } else if (!input.keyIsTapped(Input.NO_KEYS)){
+                error = "";
             }
             String msg = client.nextMessage();
             if (msg != null){
@@ -42,6 +53,8 @@ public class UsernameState extends State{
                         client.setUserame(msg.split(" ")[2]);
                         handler.setClient(client);
                         handler.changeState(LOBBY);
+                    } else if (msg.split(" ")[1].equals("0")){
+                        error = "This name has already been taken! :(";
                     }
                 }
             }
@@ -57,11 +70,29 @@ public class UsernameState extends State{
     public void draw(Graphics g) {
         back.draw(g);
         if (client.connected()){
-            g.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
+            g.setFont(Fonts.USERNAME_INPUT_FONT);
             g.setColor(Color.DARK_GRAY);
-            g.fillRect(ScreenConsts.WINDOWWIDTH/2 - inputFieldW/2, ScreenConsts.WINDOWHEIGHT/2 - inputFieldH/2, inputFieldW, inputFieldH+15);
+            g.fillRect(ScreenConsts.WINDOWWIDTH/2 - inputFieldW/2 - 202, ScreenConsts.WINDOWHEIGHT/2 - inputFieldH/2, inputFieldW, inputFieldH+15);
+
+            g.drawString("Enter an username:", ScreenConsts.WINDOWWIDTH/2 - inputFieldW/2 - 202, ScreenConsts.WINDOWHEIGHT/2 - inputFieldH/2 + 35 - 60);
             g.setColor(Color.WHITE);
-            g.drawString(inputField.content(), ScreenConsts.WINDOWWIDTH/2 - inputFieldW/2 + 15, ScreenConsts.WINDOWHEIGHT/2 - inputFieldH/2 + 35);
+
+            String inputFieldString = inputField.content();
+            if (inputField.isFocused()){
+                blinkCounter++;
+                    if (blinkCounter > 15){
+                        inputFieldString = inputFieldString + "|";
+                        if (blinkCounter > 30){
+                            blinkCounter = 0;
+                        }
+                    }
+                }
+            g.drawString(inputFieldString, ScreenConsts.WINDOWWIDTH/2 - inputFieldW/2 + 15 - 202, ScreenConsts.WINDOWHEIGHT/2 - inputFieldH/2 + 35);
+
+            g.setColor(Color.RED);
+            g.drawString(error, ScreenConsts.WINDOWWIDTH/2 - inputFieldW/2 - 202, ScreenConsts.WINDOWHEIGHT/2 - inputFieldH/2 + 35 + 60);
+
+            enter.draw(g);
         } else {
             g.setColor(Color.BLACK);
             g.drawString("Connecting...", ScreenConsts.WINDOWWIDTH/2 - 10, ScreenConsts.WINDOWHEIGHT/2 - 5);

@@ -59,7 +59,7 @@ public class Game {
         playerUnits.setReferances(camera, enemyUnits);
     }
 
-    public void run(){
+    public void update(){
         /*
          *  updating objects
          */

@@ -25,7 +25,7 @@ public abstract class Unit {
     private int LEFT = 0;
     private int RIGHT = 1;
     protected int dir = LEFT;
-    protected static int FRAMES_PER_ANIMATION = 6;
+    protected int FRAMES_PER_ANIMATION = 5;
     protected static int IDLE = -1;
     protected static int WALK = 0;
     protected static int ATK = 1;
@@ -62,7 +62,7 @@ public abstract class Unit {
             if (y + height/2 - yOff > 0 && y - height/2 - yOff < ScreenConsts.WINDOWHEIGHT) {
                 if (selected){
                     g.setColor(Color.WHITE);
-                    g.drawOval((int)(x - width/2 - 5 -xOff), (int)(y + height/2 - width/4 - yOff), width+10, width/2);
+                    g.drawOval((int)(x - width/2 - 5 -xOff), (int)(y + height - width/4 - yOff), width+10, width/2);
                 }
                 if (spritesheet == null){
                     if (color == null) {
@@ -70,7 +70,7 @@ public abstract class Unit {
                     } else {
                         g.setColor(color);
                     }
-                    g.fillRect((int)(x - width/2 -xOff), (int)(y - height/2-yOff), width, height);
+                    g.fillRect((int)(x - width/2 -xOff), (int)(y - yOff), width, height);
                 } else {
                     Image sprite;
                     if (animation == IDLE){
@@ -79,15 +79,15 @@ public abstract class Unit {
                         sprite = spritesheet.getSubimage((frame/FRAMES_PER_ANIMATION)*(width/ScreenConsts.PIXELRARIO), animation*(height/ScreenConsts.PIXELRARIO), width/ScreenConsts.PIXELRARIO, height/ScreenConsts.PIXELRARIO);
                     }
                     if (dir == LEFT){
-                        g.drawImage(sprite, (int)(x - width/2 -xOff), (int)(y - height/2-yOff), width, height, null);
+                        g.drawImage(sprite, (int)(x - width/2 -xOff), (int)(y - height - yOff), width, height, null);
                     } else {
-                        g.drawImage(sprite, (int)(x + width/2 -xOff), (int)(y - height/2-yOff), -width, height, null);
+                        g.drawImage(sprite, (int)(x + width/2 -xOff), (int)(y - height - yOff), -width, height, null);
                     }
                 }
                 g.setColor(Color.RED);
-                g.fillRect((int)(x - width/2 -xOff), (int)(y + height/2 - yOff)+5, width, 5);
+                g.fillRect((int)(x - width/2 -xOff), (int)(y - yOff)+5, width, 5);
                 g.setColor(Color.GREEN);
-                g.fillRect((int)(x - width/2 -xOff), (int)(y + height/2 - yOff)+5, (int)(width*(hp/(maxHp+0.0))), 5);
+                g.fillRect((int)(x - width/2 -xOff), (int)(y - yOff)+5, (int)(width*(hp/(maxHp+0.0))), 5);
                 
             }
         }
@@ -114,12 +114,12 @@ public abstract class Unit {
         } else {
             this.dir = RIGHT;
         }
-        if (map.inBounds((int)(this.x+xmove), (int)(this.y+height/2))){
+        if (map.inBounds((int)(this.x+xmove), (int)(this.y))){
             x += xmove;
         } else {
             clearPath();
         }
-        if (map.inBounds((int)(this.x), (int)(this.y+height/2-ymove))){
+        if (map.inBounds((int)(this.x), (int)(this.y-ymove))){
             y -= ymove;
         } else {
             clearPath();
@@ -129,11 +129,16 @@ public abstract class Unit {
     public double x() {
         return x;
     }
-
     public double y() {
         return y;
     }
 
+    public int xCenter(){
+        return (int)x;
+    }
+    public int yCenter(){
+        return (int)(y - height/2);
+    }
     public void focus(){
         this.selected = true;
     }

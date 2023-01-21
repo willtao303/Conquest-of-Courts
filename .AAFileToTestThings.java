@@ -1,9 +1,21 @@
+import java.util.Deque;
+import java.util.LinkedList;
+
 class AAFileToTestThings {
     public static void main(String[] args) {
+
+        Deque<Integer> newMessageCooldowns = new LinkedList<Integer>();
+        newMessageCooldowns.addLast(100);
+        newMessageCooldowns.addLast(100);
+        newMessageCooldowns.addLast(100);
+        for (Integer Cooldown : newMessageCooldowns){
+        }
+        System.out.println(newMessageCooldowns.peek());
 
         String [] a = "1/bob/my/asdfs/1111/aaaag".split("/", 1);
         System.out.println(a[0] + " --- " + a[0]);
 
+        
         /*int[][] a = new int[][]{{470+829, 560},
             {670+2029, 1169},
             {810+2029, 916},

@@ -69,7 +69,7 @@ public class Room {
     }
 
     public void draw(Graphics g){
-        g.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 45));
+        g.setFont(Fonts.ROOM_FONT);
         // players
         g.setColor(Color.BLUE);
         blue.draw(g);

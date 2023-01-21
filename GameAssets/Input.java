@@ -22,6 +22,8 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener, M
     public static final int MBFOUR = 3;
     public static final int MBFIVE = 4;
 
+    public static final int NO_KEYS = 42069; // arbitrary large number
+
 
     private HashMap<Integer, Boolean> keyDown = new HashMap<Integer, Boolean>();
     private int keyTapped = -1;
@@ -31,7 +33,7 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener, M
     private int mouseX = 0;
     private int mouseY = 0;
     private int scroll = 0;
-    private char changeKeybind = 42069; // arbitrary large number
+    private char changeKeybind = NO_KEYS;
 
     public Input(){
         this.defualtKeybinds();
@@ -41,7 +43,7 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener, M
         for (int i = 0; i < 5; i ++){
             mouseTap[i] = 0;
         }
-        keyTapped = -1;
+        keyTapped = NO_KEYS;
         scroll = 0;
     }
     public int scroll(){
@@ -58,10 +60,7 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener, M
     }
 
     public boolean keyIsTapped(int key){
-        if (keyTapped == key){
-            return true;
-        }
-        return false;
+        return (keyTapped == key);
     }
     public boolean keyIsTapped(char keybind){
         return keyIsTapped(keyBind.get(keybind));
@@ -112,7 +111,7 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener, M
         keyBind.put(SEND, KeyEvent.VK_ENTER);
     }
     public void setKeybind(char keybind){
-        if (keyBind.containsKey(keyBind)){
+        if (keyBind.containsKey(keybind)){
             changeKeybind = keybind;
         }
     }
@@ -164,9 +163,9 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener, M
         keyTapped = e.getKeyCode();
         keyDown.put(key, true);
 
-        if (changeKeybind != 42069){
+        if (changeKeybind != NO_KEYS){
             keyBind.replace(changeKeybind, e.getKeyCode());
-            changeKeybind = 42069;
+            changeKeybind = NO_KEYS;
         }
     }
     @Override

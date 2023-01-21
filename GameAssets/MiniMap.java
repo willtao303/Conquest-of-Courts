@@ -16,7 +16,7 @@ public class MiniMap {
     Camera cam;
 
     boolean centerPlayer = false;
-    private final int scale = 9;
+    private int scale = 5;
 
     public void addResources(Game game){
         map = game.map;
@@ -44,8 +44,8 @@ public class MiniMap {
             // these are in regular units
             int subX = (cam.x()-(SIZE*scale/2)); // anchor
             int subY = (cam.y()-(SIZE*scale/2)); // anchor
-            int subWidth = (SIZE*SIZE);
-            int subHeight = (SIZE*SIZE);
+            int subWidth = (SIZE*scale);
+            int subHeight = (SIZE*scale);
             int xOverflow = 0;
             int yOverflow = 0;
 
@@ -97,7 +97,7 @@ public class MiniMap {
                 g.setColor(Color.RED);
                 for (Enemy e: enemies.attackingEnemies){
                     if (inBounds(e.x, e.y, subX, subY, subWidth, subHeight)){
-                        g.fillRect(xPos + (e.x-subX)/(scale) - 1, yPos + (e.y-subY)/(scale) - 1, 2, 2);
+                        g.fillRect(xPos + (e.x-subX)/(scale) - 1, yPos + (e.y+e.height/2-subY)/(scale) - 1, 3, 3);
                     }
                 }
             }
@@ -106,7 +106,7 @@ public class MiniMap {
                 g.setColor(Color.RED.darker().darker());
                 for (Enemy e: enemies.defendingEnemies){
                     if (inBounds(e.x, e.y, subX, subY, subWidth, subHeight)){
-                        g.fillRect(xPos + (e.x-subX)/(scale) - 1, yPos + (e.y-subY)/(scale) - 1, 2, 2);
+                        g.fillRect(xPos + (e.x-subX)/(scale) - 1, yPos + (e.y+e.height/2-subY)/(scale) - 1, 2, 2);
                     }
                 }
             }
@@ -114,13 +114,13 @@ public class MiniMap {
             g.setColor(Color.GREEN);
             for (Unit u: units.attackingUnits){
                 if (inBounds((int)u.x(), (int)u.y(), subX, subY, subWidth, subHeight)){
-                    g.fillRect(xPos + ((int)u.x()-subX)/(scale) - 1, yPos + ((int)u.y()-subY)/(scale) - 1, 2, 2);
+                    g.fillRect(xPos + ((int)u.x()-subX)/(scale) - 1, yPos + ((int)u.y()+u.height/2-subY)/(scale) - 1, 2, 2);
                 }
             }
             g.setColor(Color.GREEN.darker().darker());
             for (Unit u: units.defendingUnits){
                 if (inBounds((int)u.x(), (int)u.y(), subX, subY, subWidth, subHeight)){
-                    g.fillRect(xPos + ((int)u.x()-subX)/(scale) - 1, yPos + ((int)u.y()-subY)/(scale) - 1, 2, 2);
+                    g.fillRect(xPos + ((int)u.x()-subX)/(scale) - 1, yPos + ((int)u.y()+u.height/2-subY)/(scale) - 1, 2, 2);
                 }
             }
         }

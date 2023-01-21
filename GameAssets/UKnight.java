@@ -1,7 +1,6 @@
 package GameAssets;
 
-import java.awt.Graphics;
-import java.awt.Color;
+
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
@@ -12,10 +11,8 @@ public class UKnight extends UnitDefender{
     UKnight(int x, int y, Map m, Point towerPos) {
         super(x, y, m, towerPos, RANGE);
         hp = maxHp = 100;
-        this.x = x;
         width = 15*ScreenConsts.PIXELRARIO;
         height = 17*ScreenConsts.PIXELRARIO;
-        this.y = y - width/2;
         speed = 3;
         sprite = "Knight";
         try {

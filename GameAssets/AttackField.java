@@ -40,7 +40,7 @@ public abstract class AttackField {
             return true;
         }
         for (Point point: getPoints()){
-            if (unit.x()-unit.width < point.x && point.x < unit.x()+unit.width && unit.y()-unit.height < point.y && point.y < unit.y()+unit.height){
+            if (unit.xCenter()-unit.width < point.x && point.x < unit.xCenter()+unit.width && unit.yCenter()-unit.height < point.y && point.y < unit.yCenter()+unit.height){
                 return true;
             }
         }

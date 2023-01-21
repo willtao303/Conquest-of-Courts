@@ -54,6 +54,9 @@ public class TextField implements KeyListener{
     public String content(){
         return content;
     }
+    public void clear(){
+        content = "";
+    }
 
     public void focus(){
         this.focused = true;

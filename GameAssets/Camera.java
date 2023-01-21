@@ -9,9 +9,12 @@ public class Camera {
     int mouseX, mouseY;
 
     Game game;
+    private int mapWidth, mapHeight;
 
     public void setup(Game game){
         this.game = game;
+        mapWidth = game.map.getPresetMap().width;
+        mapHeight = game.map.getPresetMap().height;
         this.x = 0;
         this.y = 0;
     }
@@ -28,14 +31,23 @@ public class Camera {
 
     public void move(int horizontal, int vertical){
         if (this.x + horizontal > 0){
-            this.x += horizontal;
-        } else if (this.x - 1 > 0){
-            this.x --;
+            if (this.x + horizontal < mapWidth){
+                this.x += horizontal;
+            } else {
+                this.x = mapWidth;
+            }
+        } else {
+            this.x = 0;
         }
+
         if (!(this.y + vertical < 0)){
-            this.y += vertical;
-        } else if (this.y - 1 > 0){
-            this.y --;
+            if (this.y + vertical < mapHeight){
+                this.y += vertical;
+            } else {
+                this.y = mapHeight;
+            }
+        } else{
+            this.y = 0;
         }
     }
 

@@ -67,7 +67,7 @@ public class UnitManager {
     }
     public void draw(Graphics g){
         for (Unit u: allUnits){
-            if (cam.onScreen((int)u.x(), (int)u.y(), u.height)){
+            if (cam.onScreen((int)u.xCenter(), (int)u.yCenter(), u.height)){
                 u.draw(cam.anchorX(), cam.anchorY(), g);
             }
         }

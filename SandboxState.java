@@ -16,7 +16,7 @@ public class SandboxState extends State{
 
     @Override
     public void run() {
-        game.run();
+        game.update();
         
         if (game.forfeited()){
             handler.changeState(SINGLEMENU);

@@ -138,7 +138,7 @@ public class LobbyState extends State{
             
             
             //g.drawRect(Consts.WINDOWWIDTH/2  - 400, 200, 800, 80);
-            g.setFont(new Font(Font.MONOSPACED, Font.ROMAN_BASELINE, 40));
+            g.setFont(Fonts.LOBBY_FONT);
             for (int i = 0; i < 4; i++){
                 if (i < roomCode.content().length()){
                     g.drawString(roomCode.content().charAt(i)+"", ScreenConsts.WINDOWWIDTH/2 - 200 + i*35, 50 + 55);
