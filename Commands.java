@@ -78,9 +78,14 @@ public class Commands{
      *      - no args
      */
 
-     public static final String GAME_ATKS = "gameatks";
+    public static final String GAME_ATKS = "gameatks";
     /*
      *  client -> server: 
      */
+
+    public static final String GAME_TOWERS = "gametowers";
+    /*
+    *  client -> server: 
+    */
 
 }

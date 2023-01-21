@@ -41,8 +41,8 @@ public class Map {
     public void draw (int topLeftX, int topLeftY, Graphics g){
         int xdraw = 0;
         int ydraw = 0;
-        int widthdraw = Consts.WINDOWWIDTH;
-        int heightdraw = Consts.WINDOWHEIGHT;
+        int widthdraw = ScreenConsts.WINDOWWIDTH;
+        int heightdraw = ScreenConsts.WINDOWHEIGHT;
         if (topLeftX < 0) {
            xdraw = - topLeftX;
            topLeftX = 0;
@@ -51,13 +51,13 @@ public class Map {
            ydraw = - topLeftY;
            topLeftY = 0;
         }
-        if (topLeftX + Consts.WINDOWWIDTH >= map.width){
+        if (topLeftX + ScreenConsts.WINDOWWIDTH >= map.width){
             widthdraw = map.width - topLeftX;
         }
-        if (topLeftY + Consts.WINDOWHEIGHT >= map.height){
+        if (topLeftY + ScreenConsts.WINDOWHEIGHT >= map.height){
             heightdraw =  map.height - topLeftY ;
         }try{
-        g.drawImage(map.image.getSubimage((topLeftX-1)/Consts.PIXELRARIO, (topLeftY-1)/Consts.PIXELRARIO, (widthdraw/Consts.PIXELRARIO), (heightdraw/Consts.PIXELRARIO)), xdraw, ydraw, widthdraw, heightdraw,null);
+        g.drawImage(map.image.getSubimage((topLeftX-1)/ScreenConsts.PIXELRARIO, (topLeftY-1)/ScreenConsts.PIXELRARIO, (widthdraw/ScreenConsts.PIXELRARIO), (heightdraw/ScreenConsts.PIXELRARIO)), xdraw, ydraw, widthdraw, heightdraw,null);
         }catch(Exception e){}
     }
 

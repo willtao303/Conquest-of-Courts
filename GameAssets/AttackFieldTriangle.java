@@ -32,9 +32,9 @@ public class AttackFieldTriangle extends AttackField{
         return Math.abs((a.x*(b.y-c.y) + b.x*(c.y-a.y) + c.x*(a.y-b.y))/2.0);
     }
     @Override
-    public void draw(int xOffset, int yOffset, Graphics g){
+    public void draw(int xOff, int yOff, Graphics g){
         g.setColor(Color.RED);
-        g.fillPolygon(new int[]{a.x- xOffset, b.x- xOffset, c.x- xOffset}, new int[]{a.y- yOffset, b.y- yOffset, c.y- yOffset}, 3);
+        g.fillPolygon(new int[]{a.x- xOff, b.x- xOff, c.x- xOff}, new int[]{a.y- yOff, b.y- yOff, c.y- yOff}, 3);
     }
     @Override
     protected Point[] getPoints() {
@@ -43,6 +43,6 @@ public class AttackFieldTriangle extends AttackField{
 
     @Override
     public String toString() {
-        return "3/"+a.x+"/"+a.y+"/"+b.x+"/"+b.y+"/"+c.x+"/"+c.y+"/"+dmg;
+        return "3/"+a.x+"/"+a.y+"/"+b.x+"/"+b.y+"/"+c.x+"/"+c.y+"/"+dmg();
     }
 }

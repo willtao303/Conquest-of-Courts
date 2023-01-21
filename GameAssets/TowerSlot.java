@@ -6,6 +6,8 @@ import java.awt.Color;
 
 public class TowerSlot {
     EnemyManager enemies;
+    Resources resources;
+    int index;
 
     Tower tower;
     final static int SIZE = 70;
@@ -22,20 +24,21 @@ public class TowerSlot {
         TowerPreset.BOMBER,
         TowerPreset.MAGE,
         -1,
-        -1
+        TowerPreset.CASTLE
     };
     private final static int BUTTON_DIAM = 40;
     private final static int PD = 3; // padding for the buttons hitbox
     private int x;
     private int y;
     private boolean focused;
+    private int hover = -1;
     
     TowerSlot(int x, int y){
         this.x = x;
         this.y = y;
     }
 
-    public void update(LinkedList<AttackField> attacks){
+    public void update(LinkedList<AttackField> attacks, UnitManager units, Map map){
         if (tower != null){
             tower.update();
             if (tower.isShootingType()){
@@ -49,49 +52,50 @@ public class TowerSlot {
                     }
                 }
             }
+            if (tower.isSpawningType()){
+                if (tower.spawnCooldown() <= 0){
+                    Unit u = tower.spawn(x, y, map);
+                    if (u != null){
+                        units.spawn(u);
+                    }
+                }
+            }
         }
     }
     
     public void draw(int offsetX, int offsetY, Graphics g){
         if (focused){
+            g.setColor(Color.GRAY);
+            int [] upgrades;
             if (tower == null){
-                g.setColor(Color.GRAY);
-                for (int i = 0; i < NUM_BUTTONS; i++){ // TODO finish tower class and limit num of buttons to upgrades
-                    if (this.tower != null){
-                        if (i < tower.NUM_OF_UPGRADES){
-                            if (TowerPreset.UPGRADES[tower.preset][i] != -1){
-                                g.setColor(TowerPreset.COLOR[TowerPreset.UPGRADES[tower.preset][i]]);
-                            } else {
-                                g.setColor(Color.GRAY);
-                            }
-                        }
-                    } else {
-                        if (i < INITIAL_UPGRADES.length){
-                            if (INITIAL_UPGRADES[i] != -1){
-                                g.setColor(TowerPreset.COLOR[INITIAL_UPGRADES[i]]);
-                            } else {
-                                g.setColor(Color.GRAY);
-                            }
-                        }
-                    }
-                    g.fillOval(x+BUTTON_OFFSETS[i][0]-offsetX, y+BUTTON_OFFSETS[i][1]-offsetY, BUTTON_DIAM, BUTTON_DIAM);
-                }
-                
-                g.setColor(Color.LIGHT_GRAY);
+                upgrades = INITIAL_UPGRADES;
             } else {
-                for (int i = 0; i < tower.NUM_OF_UPGRADES; i++){ // TODO finish tower class and limit num of buttons to upgrades
-                    if (i == 0) {
-                        g.setColor(Color.DARK_GRAY);
+                upgrades = tower.UPGRADES;
+            }
+            for (int i = 0; i < upgrades.length; i++){
+                if (upgrades[i] != -1){
+                    if (i == hover){
+                        g.setColor(new Color(240, 188, 58));
+                        g.fillRect(x+BUTTON_OFFSETS[i][0]-offsetX + BUTTON_DIAM + 5, y+BUTTON_OFFSETS[i][1]-offsetY + BUTTON_DIAM/2 - 3, 6, 6);
+                        if (resources.coins < TowerPreset.STATS[upgrades[i]][TowerPreset.COST]){
+                            g.setColor(Color.RED);
+                        } else {
+                            g.setColor(Color.WHITE);
+                        }
+                        g.drawString(TowerPreset.STATS[upgrades[i]][TowerPreset.COST]+"", x+BUTTON_OFFSETS[i][0]-offsetX + BUTTON_DIAM + + 15, y+BUTTON_OFFSETS[i][1]-offsetY + BUTTON_DIAM/2 +5);
                     }
-                    g.fillOval(x+BUTTON_OFFSETS[i][0]-offsetX, y+BUTTON_OFFSETS[i][1]-offsetY, BUTTON_DIAM, BUTTON_DIAM);
+                    g.setColor(TowerPreset.COLOR[upgrades[i]]);
+                } else {
+                    g.setColor(Color.DARK_GRAY);
                 }
-                
+                g.fillOval(x+BUTTON_OFFSETS[i][0]-offsetX, y+BUTTON_OFFSETS[i][1]-offsetY, BUTTON_DIAM, BUTTON_DIAM);
             }
         } else {
             g.setColor(Color.GRAY);
         }
         if (tower != null){
             tower.draw(x-SIZE/2-offsetX, y-SIZE/2-offsetY, SIZE, g);
+            tower.drawRange(x-offsetX, y-offsetY, focused, g);
         } else {
             g.fillRect(x-SIZE/2-offsetX, y-SIZE/2-offsetY, SIZE, SIZE);
         }
@@ -107,7 +111,7 @@ public class TowerSlot {
     public boolean clicked(int mouseX, int mouseY){
         return x-SIZE/2 < mouseX && mouseX < x+SIZE/2 && y-SIZE/2 < mouseY  && mouseY < y+SIZE/2;
     }
-    public boolean buttonClicked(int mouseX, int mouseY){
+    public void buttonHovered(int mouseX, int mouseY){
         int [] upgrades;
         if (tower == null){
             upgrades = INITIAL_UPGRADES;
@@ -122,12 +126,29 @@ public class TowerSlot {
             buttonClicked++;
         }
         if (buttonClicked != upgrades.length){
-            if (upgrades[buttonClicked] != -1){
-                tower = new Tower(x, y, upgrades[buttonClicked]);
-            }
-            return true;
+            hover = buttonClicked;
+        } else {
+            hover = -1;
         }
-        return false;
+    }
+    public boolean buttonClicked(){
+        if (hover == -1){
+            return false;
+        }
+        int [] upgrades;
+        if (tower == null){
+            upgrades = INITIAL_UPGRADES;
+        } else {
+            upgrades = tower.UPGRADES;
+        }
+        if (upgrades[hover] != -1){
+            if (resources.coins > TowerPreset.STATS[upgrades[hover]][TowerPreset.COST]){
+                resources.coins -= TowerPreset.STATS[upgrades[hover]][TowerPreset.COST];
+                tower = new Tower(x, y, upgrades[hover]);
+            }
+        }
+        return true;
+
     }
 
     public int x(){
@@ -139,5 +160,12 @@ public class TowerSlot {
 
     public void setEnemies(EnemyManager e){
         this.enemies = e;
+    }
+    public void setResources(Resources r){
+        resources = r;
+    }
+
+    public String toString(){
+        return index + "/" + tower.preset + "/" + tower.hp + "/" + 0;
     }
 }

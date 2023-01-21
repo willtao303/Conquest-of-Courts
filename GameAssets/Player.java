@@ -149,14 +149,14 @@ public class Player {
         path.add(new Point(x, y));
     }
 
-    public void draw(int xOffset, int yOffset, Graphics g){
+    public void draw(int xOff, int yOff, Graphics g){
         if (dead < 0) {
             g.setColor(Color.MAGENTA);
-            g.fillRect((int)x - xOffset -WIDTH/2, (int)y - yOffset-HEIGHT/2, WIDTH, HEIGHT);
+            g.fillRect((int)x - xOff -WIDTH/2, (int)y - yOff-HEIGHT/2, WIDTH, HEIGHT);
         }
         if (!path.isEmpty()){
             //g.setColor(Color.YELLOW);
-            //g.fillRect(path.peek().x - xOffset - 5, path.peek().y - yOffset-5, 10, 10);
+            //g.fillRect(path.peek().x - xOff - 5, path.peek().y - yOff-5, 10, 10);
         }
     }
 

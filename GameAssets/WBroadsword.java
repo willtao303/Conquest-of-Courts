@@ -25,7 +25,7 @@ public class WBroadsword extends Weapon{
         }
         attackCD = 20;
 
-        double angle = Math.toDegrees(Math.atan2( y-(Consts.WINDOWHEIGHT/2), x-(Consts.WINDOWWIDTH/2) ));
+        double angle = Math.toDegrees(Math.atan2( y-(ScreenConsts.WINDOWHEIGHT/2), x-(ScreenConsts.WINDOWWIDTH/2) ));
         Point a = new Point((int)(player.x() + adist*Math.cos(Math.toRadians(angle))), player.y() - (int)(-adist*Math.sin(Math.toRadians(angle))));
         Point b = new Point((int)(player.x() + bdist*Math.cos(Math.toRadians(angle-bdir))), player.y() - (int)(-bdist*Math.sin(Math.toRadians(angle-bdir))));
         Point c = new Point((int)(player.x() + bdist*Math.cos(Math.toRadians(angle+bdir))), player.y() - (int)(-bdist*Math.sin(Math.toRadians(angle+bdir))));

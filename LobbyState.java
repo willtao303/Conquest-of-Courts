@@ -3,7 +3,7 @@ import java.awt.Graphics;
 import java.awt.Font;
 
 import Components.*;
-import GameAssets.Consts;
+import GameAssets.ScreenConsts;
 import GameAssets.Game;
 import GameAssets.Input;
 
@@ -11,9 +11,9 @@ public class LobbyState extends State{
     Room room;
     Button backButton = new ImageButton(120, 120, Button.BACK_BUTTON);
     Button exitButton = new ImageButton(150, 150, Button.EXIT_BUTTON);
-    Button joinButton = new BasicButton(Consts.WINDOWWIDTH/2 + 30 + 100, 50 + 15 + 25, 180, 50, "join");
-    Button startButton = new BasicButton(Consts.WINDOWWIDTH/4, Consts.WINDOWHEIGHT/2 - 180 + 30, Consts.WINDOWWIDTH/4, 60, "START GAME");
-    Button unstartButton = new BasicButton(Consts.WINDOWWIDTH/4 + Consts.WINDOWWIDTH/8 - 30,Consts.WINDOWHEIGHT/2 - 180 + 30, 20, 20, "x");
+    Button joinButton = new BasicButton(ScreenConsts.WINDOWWIDTH/2 + 30 + 100, 50 + 15 + 25, 180, 50, "join");
+    Button startButton = new BasicButton(ScreenConsts.WINDOWWIDTH/4, ScreenConsts.WINDOWHEIGHT/2 - 180 + 30, ScreenConsts.WINDOWWIDTH/4, 60, "START GAME");
+    Button unstartButton = new BasicButton(ScreenConsts.WINDOWWIDTH/4 + ScreenConsts.WINDOWWIDTH/8 - 30,ScreenConsts.WINDOWHEIGHT/2 - 180 + 30, 20, 20, "x");
 
     TextField roomCode = new TextField();
     int backButtonCD;
@@ -133,17 +133,17 @@ public class LobbyState extends State{
             // width 500
             // section 1: centered horizontally, 50 away from top, full width, 80 tall
             // section 2: centered horizontally, 50 away from section 1, full width, full height - 50
-            g.drawRect(Consts.WINDOWWIDTH/2 - 250, 50, 500, 80);
-            g.drawRect(Consts.WINDOWWIDTH/2 - 250, 50 + 80 + 50, 500, Consts.WINDOWHEIGHT - (180 + 50));
+            g.drawRect(ScreenConsts.WINDOWWIDTH/2 - 250, 50, 500, 80);
+            g.drawRect(ScreenConsts.WINDOWWIDTH/2 - 250, 50 + 80 + 50, 500, ScreenConsts.WINDOWHEIGHT - (180 + 50));
             
             
             //g.drawRect(Consts.WINDOWWIDTH/2  - 400, 200, 800, 80);
             g.setFont(new Font(Font.MONOSPACED, Font.ROMAN_BASELINE, 40));
             for (int i = 0; i < 4; i++){
                 if (i < roomCode.content().length()){
-                    g.drawString(roomCode.content().charAt(i)+"", Consts.WINDOWWIDTH/2 - 200 + i*35, 50 + 55);
+                    g.drawString(roomCode.content().charAt(i)+"", ScreenConsts.WINDOWWIDTH/2 - 200 + i*35, 50 + 55);
                 } else {
-                    g.drawString("_", Consts.WINDOWWIDTH/2 - 200 + i*35, 50 + 55 - 7);
+                    g.drawString("_", ScreenConsts.WINDOWWIDTH/2 - 200 + i*35, 50 + 55 - 7);
                 }
 
             }  

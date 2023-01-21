@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 import Components.*;
-import GameAssets.Consts;
+import GameAssets.ScreenConsts;
 import GameAssets.Game;
 
 import java.awt.Graphics;
@@ -124,16 +124,16 @@ public class Room {
         int slot;
         String name = null;
         private int x, y; // top right, not center
-        private int width = Consts.WINDOWWIDTH/4 - 20, height = 60;
+        private int width = ScreenConsts.WINDOWWIDTH/4 - 20, height = 60;
 
         SlotTile(int slotIndex){
             slot = slotIndex;
             if (slotIndex >= 0){
                 x = 10 + (width+20)*(slotIndex%2);
-                y = (slotIndex/2)*(height+20) + Consts.WINDOWHEIGHT/2 - 100;
+                y = (slotIndex/2)*(height+20) + ScreenConsts.WINDOWHEIGHT/2 - 100;
             } else {
                 x = 10;
-                y = Consts.WINDOWHEIGHT/2 - 260;
+                y = ScreenConsts.WINDOWHEIGHT/2 - 260;
                 if (slotIndex == Game.BLUE){
                     x += (width+20);
                 } 

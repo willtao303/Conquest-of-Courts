@@ -1,7 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Font;
-import GameAssets.Consts;
+import GameAssets.ScreenConsts;
 import GameAssets.Input;
 import Components.*;
 
@@ -59,12 +59,12 @@ public class UsernameState extends State{
         if (client.connected()){
             g.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
             g.setColor(Color.DARK_GRAY);
-            g.fillRect(Consts.WINDOWWIDTH/2 - inputFieldW/2, Consts.WINDOWHEIGHT/2 - inputFieldH/2, inputFieldW, inputFieldH+15);
+            g.fillRect(ScreenConsts.WINDOWWIDTH/2 - inputFieldW/2, ScreenConsts.WINDOWHEIGHT/2 - inputFieldH/2, inputFieldW, inputFieldH+15);
             g.setColor(Color.WHITE);
-            g.drawString(inputField.content(), Consts.WINDOWWIDTH/2 - inputFieldW/2 + 15, Consts.WINDOWHEIGHT/2 - inputFieldH/2 + 35);
+            g.drawString(inputField.content(), ScreenConsts.WINDOWWIDTH/2 - inputFieldW/2 + 15, ScreenConsts.WINDOWHEIGHT/2 - inputFieldH/2 + 35);
         } else {
             g.setColor(Color.BLACK);
-            g.drawString("Connecting...", Consts.WINDOWWIDTH/2 - 10, Consts.WINDOWHEIGHT/2 - 5);
+            g.drawString("Connecting...", ScreenConsts.WINDOWWIDTH/2 - 10, ScreenConsts.WINDOWHEIGHT/2 - 5);
         }
 
     }

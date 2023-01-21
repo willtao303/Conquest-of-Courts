@@ -1,6 +1,6 @@
 package GameAssets;
 
 public class Resources {
-    public int coins = 0;
-    public int crystals = 0;
+    public int coins = 500;
+    public int crystals = 500;
 }

@@ -4,10 +4,10 @@ import java.awt.Graphics;
 
 import java.awt.Color;
 
-public class UTestDummy extends Unit{
+public class UnitTestDummy extends Unit{
 
-    UTestDummy(int x, int y, Map m, EnemyManager e){
-        super(x,y,m,e);
+    UnitTestDummy(int x, int y, Map m){
+        super(x,y,m);
         hp = maxHp = 99;
         this.x = x;
         this.y = y;
@@ -17,19 +17,12 @@ public class UTestDummy extends Unit{
     }
 
     @Override
-    public void update() {
-        if (hp < 0){
-            this.dead = true;
-        }
-    }
-
-    @Override
     public void move() {}
 
     @Override
     public void draw(int xOff, int yOff, Graphics g) {
-        if (x + width/2 - xOff > 0 && x - width/2 - xOff < Consts.WINDOWWIDTH) {
-            if (y + height/2 - yOff > 0 && y - height/2 - yOff < Consts.WINDOWHEIGHT) {
+        if (x + width/2 - xOff > 0 && x - width/2 - xOff < ScreenConsts.WINDOWWIDTH) {
+            if (y + height/2 - yOff > 0 && y - height/2 - yOff < ScreenConsts.WINDOWHEIGHT) {
                 g.setColor(Color.YELLOW);
                 g.fillRect((int)(x - width/2 -xOff), (int)(y - height/2-yOff), width, height);
                 if (selected){
@@ -48,6 +41,18 @@ public class UTestDummy extends Unit{
 
     @Override
     protected void clearPath() {
+    }
+
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected boolean isMoving() {
+        // Test dummy does not move B)
+        return false;
     }
     
 }

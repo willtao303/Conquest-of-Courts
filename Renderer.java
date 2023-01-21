@@ -23,8 +23,8 @@ public class Renderer {
     }
 
     public void setup(){
-        frame.setSize(Consts.WINDOWWIDTH,Consts.WINDOWHEIGHT);
-        frame.setMinimumSize(new Dimension(Consts.WINDOWWIDTH,Consts.WINDOWHEIGHT));
+        frame.setSize(ScreenConsts.WINDOWWIDTH,ScreenConsts.WINDOWHEIGHT);
+        frame.setMinimumSize(new Dimension(ScreenConsts.WINDOWWIDTH,ScreenConsts.WINDOWHEIGHT));
         frame.setResizable(false);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,17 +66,17 @@ public class Renderer {
         fullscreen = !fullscreen;
         if (fullscreen){
             frame.dispose();
-            Consts.FULLSCREEN_DIMS();
+            ScreenConsts.FULLSCREEN_DIMS();
             frame.setUndecorated(true);
             frame.setVisible(true);
             frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         } else {
             frame.dispose();
-            Consts.WINDOWED_DIMS();
+            ScreenConsts.WINDOWED_DIMS();
             frame.setUndecorated(false);
             frame.setVisible(true);
             frame.setExtendedState(JFrame.NORMAL);
-            frame.setSize(Consts.WINDOWWIDTH,Consts.WINDOWHEIGHT);
+            frame.setSize(ScreenConsts.WINDOWWIDTH,ScreenConsts.WINDOWHEIGHT);
             frame.setLocationRelativeTo(null);
         }
     }

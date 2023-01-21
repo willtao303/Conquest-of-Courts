@@ -1,9 +1,10 @@
 class AAFileToTestThings {
     public static void main(String[] args) {
 
-        String[] b = "hi my name is bob".split(" ");
+        String [] a = "1/bob/my/asdfs/1111/aaaag".split("/", 1);
+        System.out.println(a[0] + " --- " + a[0]);
 
-        int[][] a = new int[][]{{470+829, 560},
+        /*int[][] a = new int[][]{{470+829, 560},
             {670+2029, 1169},
             {810+2029, 916},
             {787+2029, 468},
@@ -18,7 +19,7 @@ class AAFileToTestThings {
         
         for (int[] i: a){
             //System.out.println("{" + i[0] + ", " + i[1] + "},");
-        }
+        }*/
 
     }
 }

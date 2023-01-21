@@ -23,7 +23,7 @@ public abstract class AttackField {
 
 
     public boolean hitPlayer(Player p){
-        if (collidesPoint(p.x()-p.WIDTH, p.y()-p.HEIGHT)||collidesPoint(p.x()+p.WIDTH, p.y()-p.HEIGHT)||collidesPoint(p.x()-p.WIDTH, p.y()+p.HEIGHT)||collidesPoint(p.x()+p.WIDTH, p.y()+p.HEIGHT)){
+        if (collidesPoint(p.x()-p.WIDTH/2, p.y()-p.HEIGHT/2)||collidesPoint(p.x()+p.WIDTH/2, p.y()-p.HEIGHT/2)||collidesPoint(p.x()-p.WIDTH/2, p.y()+p.HEIGHT/2)||collidesPoint(p.x()+p.WIDTH/2, p.y()+p.HEIGHT/2)){
             return true;
         } else {
             for (Point point: getPoints()){
@@ -47,6 +47,22 @@ public abstract class AttackField {
         return false;
     }
 
+    public boolean hitCrystal(BaseCrystal c){
+        if (collidesPoint(c.x()-c.width()/2, c.y()-c.height()/2)||
+            collidesPoint(c.x()-c.width()/2, c.y()+c.height()/2)||
+            collidesPoint(c.x()+c.width()/2, c.y()-c.height()/2)||
+            collidesPoint(c.x()+c.width()/2, c.y()+c.height()/2)){
+            return true;
+        } else {
+            for (Point point: getPoints()){
+                if (c.x()-c.width() < point.x && point.x < c.x()+c.width() && 
+                    c.y()-c.height() < point.y && point.y < c.y()+c.height()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     public void update(){
         this.tickcounter++;
@@ -73,13 +89,14 @@ public abstract class AttackField {
 
 
     public void move(){}
-    public abstract void draw (int xOffset, int yOffset, Graphics g);
+    public abstract void draw (int xOff, int yOff, Graphics g);
 
     public boolean dead(){
         return tickcounter >= ticks;
     }
     protected void kill(){
         tickcounter = ticks;
+        active = false;
     }
 
     public abstract String toString();

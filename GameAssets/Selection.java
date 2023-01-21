@@ -5,6 +5,7 @@ public class Selection {
     public static final int TOWER = 1;
     public static final int UNIT = 2;
     public static final int MULTIUNIT = 3;
+
     int object = -1;
     int index = -1;
     private TowerSlot t = null;
@@ -45,14 +46,13 @@ public class Selection {
     }
     public void deselect(){
         if (object == TOWER){
-            object = NONE;
             t.unfocus();
             t = null;
         } else if (object == UNIT){
-            object = NONE;
             u.unfocus();
             u = null;
         }
+        object = NONE;
 
     }
 
@@ -61,6 +61,9 @@ public class Selection {
     }
     public Unit unit(){
         return u;
+    }
+    public int getSelected() {
+        return object;
     }
     
 }

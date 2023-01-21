@@ -1,14 +1,14 @@
 import java.awt.Graphics;
 
 import Components.*;
-import GameAssets.Consts;
+import GameAssets.ScreenConsts;
 import GameAssets.Input;
 
 public class LonelyMenuState extends State{
     Button backButton = new ImageButton(150,150, Button.BACK_BUTTON);
-    Button campaign = new BasicButton(Consts.WINDOWWIDTH/2 - 250 - 10, Consts.WINDOWHEIGHT/2, 500, 800);
-    Button sandbox = new BasicButton(Consts.WINDOWWIDTH/2 + 250 + 10, Consts.WINDOWHEIGHT/2 - 400 + 250, 500, 500-10);
-    Button tutorial = new BasicButton(Consts.WINDOWWIDTH/2 + 250 + 10, Consts.WINDOWHEIGHT/2 + 400 - 150, 500, 300-10);
+    Button campaign = new BasicButton(ScreenConsts.WINDOWWIDTH/2 - 250 - 10, ScreenConsts.WINDOWHEIGHT/2, 500, 800);
+    Button sandbox = new BasicButton(ScreenConsts.WINDOWWIDTH/2 + 250 + 10, ScreenConsts.WINDOWHEIGHT/2 - 400 + 250, 500, 500-10);
+    Button tutorial = new BasicButton(ScreenConsts.WINDOWWIDTH/2 + 250 + 10, ScreenConsts.WINDOWHEIGHT/2 + 400 - 150, 500, 300-10);
     @Override
     public void start() {
         

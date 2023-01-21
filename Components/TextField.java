@@ -61,6 +61,9 @@ public class TextField implements KeyListener{
     public void unfocus(){
         this.focused = false;
     }
+    public boolean isFocused() {
+        return focused;
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {

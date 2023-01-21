@@ -15,8 +15,6 @@ public class Client{
     private final int PORT = 5420;
 
     private String username;
-    private EnemyManager e;
-    private Game g;
 
     private Socket socket;
     private PrintWriter output;
@@ -82,13 +80,7 @@ public class Client{
     public void update(){
 
     }
-
-    public void setEnemyManager(EnemyManager E){
-        e = E;
-    }
-    public void setGame(Game G){
-        g = G;
-    }
+    
     public void setUserame(String s){
         username = s;
     }
@@ -134,7 +126,7 @@ public class Client{
             try{
                 while (true){
                     String msg = input.readLine();
-                    //System.out.println(msg);
+                    //System.out.pri/ntln(msg);
                     if (msg != null){
                         messages.offer(msg);
                     }

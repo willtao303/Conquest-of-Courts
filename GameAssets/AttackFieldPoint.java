@@ -28,9 +28,9 @@ public class AttackFieldPoint extends AttackField{
     }
 
     @Override
-    public void draw(int xOffset, int yOffset, Graphics g) {
+    public void draw(int xOff, int yOff, Graphics g) {
         g.setColor(Color.RED);
-        g.fillOval(pos.x - 5 - xOffset, pos.y - 5 - yOffset, 10, 10);
+        g.fillOval(pos.x - 5 - xOff, pos.y - 5 - yOff, 10, 10);
         
     }
 
@@ -41,6 +41,6 @@ public class AttackFieldPoint extends AttackField{
 
     @Override
     public String toString() {
-        return "1/"+pos.x+"/"+pos.y+"/"+dmg;
+        return "1/"+pos.x+"/"+pos.y+"/"+dmg();
     }
 }

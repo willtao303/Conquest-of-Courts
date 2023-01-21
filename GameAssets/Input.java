@@ -31,7 +31,7 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener, M
     private int mouseX = 0;
     private int mouseY = 0;
     private int scroll = 0;
-    private char changeKeybind = 42069;
+    private char changeKeybind = 42069; // arbitrary large number
 
     public Input(){
         this.defualtKeybinds();

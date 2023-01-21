@@ -9,6 +9,7 @@ public class MainGame {
     private Input input;
     private Renderer renderer;
     private Client client;
+    private ChatRoom chat;
     private boolean running = true;
 
     State[] states = new State[]{
@@ -49,12 +50,16 @@ public class MainGame {
                 changeState(stateChanges.remove(), true);
             }
         }
+        renderer.frame.dispose();
     }
 
     public void resetState(int state){
         if (state==State.MAINMENU){
             states[state] = new MainMenuState();
         }
+    }
+    public ChatRoom getChat(){
+        return chat;
     }
     public Client getClient(){
         return client;
@@ -82,5 +87,8 @@ public class MainGame {
 
     public void draw(Graphics g) {
         states[currentState].draw(g);
+    }
+    public void end(){
+        this.running = false;
     }
 }

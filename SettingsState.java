@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import Components.*;
-import GameAssets.Consts;
+import GameAssets.ScreenConsts;
 import GameAssets.Input;
 
 public class SettingsState extends State{
@@ -11,22 +11,22 @@ public class SettingsState extends State{
     private final int scrollfactor = 70;
     int tab = 1;
     int scroll = 0;
-    Button generalSettingsButton = new BasicButton(Consts.WINDOWWIDTH/2-450-40, 300, 80, 80);
-    Button keybindSettingsButton = new BasicButton(Consts.WINDOWWIDTH/2-450-40, 380, 80, 80);
+    Button generalSettingsButton = new BasicButton(ScreenConsts.WINDOWWIDTH/2-450-40, 300, 80, 80);
+    Button keybindSettingsButton = new BasicButton(ScreenConsts.WINDOWWIDTH/2-450-40, 380, 80, 80);
     Button backButton = new ImageButton(100, 100, Button.BACK_BUTTON);
 
     ScrollingBasicButton[] generalButtons = {};
     ScrollingBasicButton[] keyBindButtons = {
-        new ScrollingBasicButton(Consts.WINDOWWIDTH/2 + 200, 150, 400, 80),
-        new ScrollingBasicButton(Consts.WINDOWWIDTH/2 + 200, 250, 400, 80),
-        new ScrollingBasicButton(Consts.WINDOWWIDTH/2 + 200, 350, 400, 80),
-        new ScrollingBasicButton(Consts.WINDOWWIDTH/2 + 200, 450, 400, 80),
-        new ScrollingBasicButton(Consts.WINDOWWIDTH/2 + 200, 550, 400, 80),
-        new ScrollingBasicButton(Consts.WINDOWWIDTH/2 + 200, 750, 400, 80),
-        new ScrollingBasicButton(Consts.WINDOWWIDTH/2 + 200, 950, 400, 80),
-        new ScrollingBasicButton(Consts.WINDOWWIDTH/2 + 200, 1050, 400, 80),
-        new ScrollingBasicButton(Consts.WINDOWWIDTH/2 + 200, 1250, 400, 80),
-        new ScrollingBasicButton(Consts.WINDOWWIDTH/2 + 200, 1650, 400, 80)
+        new ScrollingBasicButton(ScreenConsts.WINDOWWIDTH/2 + 200, 150, 400, 80),
+        new ScrollingBasicButton(ScreenConsts.WINDOWWIDTH/2 + 200, 250, 400, 80),
+        new ScrollingBasicButton(ScreenConsts.WINDOWWIDTH/2 + 200, 350, 400, 80),
+        new ScrollingBasicButton(ScreenConsts.WINDOWWIDTH/2 + 200, 450, 400, 80),
+        new ScrollingBasicButton(ScreenConsts.WINDOWWIDTH/2 + 200, 550, 400, 80),
+        new ScrollingBasicButton(ScreenConsts.WINDOWWIDTH/2 + 200, 750, 400, 80),
+        new ScrollingBasicButton(ScreenConsts.WINDOWWIDTH/2 + 200, 950, 400, 80),
+        new ScrollingBasicButton(ScreenConsts.WINDOWWIDTH/2 + 200, 1050, 400, 80),
+        new ScrollingBasicButton(ScreenConsts.WINDOWWIDTH/2 + 200, 1250, 400, 80),
+        new ScrollingBasicButton(ScreenConsts.WINDOWWIDTH/2 + 200, 1650, 400, 80)
     };
     ScrollingBasicButton[] currentButtons = generalButtons;
 
@@ -71,12 +71,12 @@ public class SettingsState extends State{
         keybindSettingsButton.draw(g);
         backButton.draw(g);
         g.setColor(Color.WHITE);
-        g.fillRect(Consts.WINDOWWIDTH/2-450, 0, 900, Consts.WINDOWHEIGHT);
+        g.fillRect(ScreenConsts.WINDOWWIDTH/2-450, 0, 900, ScreenConsts.WINDOWHEIGHT);
         g.setColor(Color.BLACK);
-        g.drawRect(Consts.WINDOWWIDTH/2-450, 0, 900, Consts.WINDOWHEIGHT);
+        g.drawRect(ScreenConsts.WINDOWWIDTH/2-450, 0, 900, ScreenConsts.WINDOWHEIGHT);
 
         for (Button b: currentButtons){
-            if (-80 < b.y() && b.y() < Consts.WINDOWHEIGHT+80){
+            if (-80 < b.y() && b.y() < ScreenConsts.WINDOWHEIGHT+80){
                 b.draw(g);
             }
         }

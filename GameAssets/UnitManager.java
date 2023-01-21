@@ -1,7 +1,11 @@
 package GameAssets;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import java.awt.Graphics;
 
@@ -10,8 +14,8 @@ public class UnitManager {
     private Camera cam;
     EnemyManager enemies;
 
-    private int idCounter = 0; // assuming we will not have over 2^32 units spawned in a single game
-    LinkedList<Unit> allUnits = new LinkedList<Unit>();
+    private int idCounter = 0; //t assuming we will not have over 2^32 units spawned in a single game
+    TreeSet<Unit> allUnits = new TreeSet<>(new DrawOrder());
     HashMap<Integer, Unit> unitById = new HashMap<Integer, Unit>();
     LinkedList<UnitAttacker> attackingUnits = new LinkedList<UnitAttacker>();
     LinkedList<UnitDefender> defendingUnits = new LinkedList<UnitDefender>();
@@ -30,7 +34,7 @@ public class UnitManager {
         for (Unit u: allUnits){
             u.update();
             u.move();
-            if (u.dead){
+            if (u.isDead()){
                 allUnits.remove(u);
                 unitById.remove(u.getId());
                 if (u instanceof UnitDefender){
@@ -55,7 +59,7 @@ public class UnitManager {
     }
     public Unit clicked(int mouseX, int mouseY){
         for (Unit u: allUnits){
-            if (u.distTo(mouseX, mouseY) < Math.max(u.height, u.width)){
+            if (u.distTo(mouseX, mouseY) < Math.max(u.height, u.width)/2){
                 return u;
             }
         }
@@ -72,19 +76,28 @@ public class UnitManager {
     public String toString(){
         String output = " #";
         for(Unit u: attackingUnits){
-            output = output + " " + u.getId() + "/" + (int)u.x() + "/" + (int)u.y() + "/" + u.hp; // + "/" + sprite + "/" + frameNum;
+            output = output + u.toString(); 
         }
         if (attackingUnits.size() == 0){
             output = output + " none";
         }
         output = output + " #";
         for(Unit u: defendingUnits){
-            output = output + " " + u.getId() + "/" + (int)u.x() + "/" + (int)u.y() + "/" + u.hp; // + "/" + sprite + "/" + frameNum;
+            output =  output + u.toString();
         }
         if (defendingUnits.size() == 0){
             output = output + " none";
         }
 
         return output;
+    }
+
+    private class DrawOrder implements Comparator<Unit>{
+
+        @Override
+        public int compare(Unit unitA, Unit unitB) {
+            return (int)(unitA.y() - unitB.y());
+        }
+        
     }
 }

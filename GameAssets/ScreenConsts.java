@@ -2,7 +2,7 @@ package GameAssets;
 
 import java.awt.Toolkit;
 
-public class Consts {
+public class ScreenConsts {
 
     private final static int WINDOWEDWIDTH = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.95);//1600;
     private final static int WINDOWEDHEIGHT = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.95);//1000;

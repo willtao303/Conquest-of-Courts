@@ -17,10 +17,17 @@ public class SandboxState extends State{
     @Override
     public void run() {
         game.run();
-        if (input.mouseIsTapped(Input.RMB)){
-            defenders.add("1/" + (input.mousePosX()+game.getCamera().anchorX()) + "/" + (input.mousePosY()+game.getCamera().anchorY()) + "/" + 100);
+        
+        if (game.forfeited()){
+            handler.changeState(SINGLEMENU);
         }
-        enemies.setAttackers(defenders.toArray(new String[defenders.size()]));
+        /*
+        if (input.mouseIsTapped(Input.RMB)){
+            if (input.keyIsDown(Input.MULTISELECT)){
+                defenders.add("1/" + (input.mousePosX()+game.getCamera().anchorX()) + "/" + (input.mousePosY()+game.getCamera().anchorY()) + "/" + 100);
+            }
+        }*/
+        //enemies.setAttackers(defenders.toArray(new String[defenders.size()]));
     }
 
     @Override

@@ -60,10 +60,10 @@ public class Camera {
     }
 
     public int anchorX(){
-        return this.x - (Consts.WINDOWWIDTH/2);
+        return this.x - (ScreenConsts.WINDOWWIDTH/2);
     }
     public int anchorY(){
-        return this.y - (Consts.WINDOWHEIGHT/2);
+        return this.y - (ScreenConsts.WINDOWHEIGHT/2);
     }
     public int x(){
         return this.x;
@@ -73,7 +73,7 @@ public class Camera {
     }
 
     public boolean onScreen(int x, int y, int padding) {
-        return this.x - (Consts.WINDOWWIDTH/2) - padding < x && x < this.x + (Consts.WINDOWWIDTH/2) + padding && this.y - (Consts.WINDOWHEIGHT/2) - padding < y && y < this.y + (Consts.WINDOWHEIGHT/2) + padding;
+        return this.x - (ScreenConsts.WINDOWWIDTH/2) - padding < x && x < this.x + (ScreenConsts.WINDOWWIDTH/2) + padding && this.y - (ScreenConsts.WINDOWHEIGHT/2) - padding < y && y < this.y + (ScreenConsts.WINDOWHEIGHT/2) + padding;
     }
 
 }

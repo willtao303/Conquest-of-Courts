@@ -1,32 +1,43 @@
 import java.awt.Graphics;
 import java.awt.Color;
-import GameAssets.Consts;
+import GameAssets.ScreenConsts;
 import GameAssets.Input;
 import Components.*;
 
 public class MainMenuState extends State {
     Button[] buttons = {
-        new ImageButton(Consts.WINDOWWIDTH/2, Consts.WINDOWHEIGHT/2+50, Button.START_BUTTON),
-        new ImageButton(Consts.WINDOWWIDTH/2, Consts.WINDOWHEIGHT/2+150, Button.MULTIPLAYER_BUTTON),
-        new BasicButton(Consts.WINDOWWIDTH/2-50, Consts.WINDOWHEIGHT/2+250, 700, 80),
-        new ImageButton(Consts.WINDOWWIDTH/2+360, Consts.WINDOWHEIGHT/2+250, Button.SETTINGS_BUTTON)
+        new ImageButton(ScreenConsts.WINDOWWIDTH/2, ScreenConsts.WINDOWHEIGHT/2+50, Button.START_BUTTON),
+        new ImageButton(ScreenConsts.WINDOWWIDTH/2, ScreenConsts.WINDOWHEIGHT/2+150, Button.MULTIPLAYER_BUTTON),
+        new BasicButton(ScreenConsts.WINDOWWIDTH/2-50, ScreenConsts.WINDOWHEIGHT/2+250, 700, 80),
+        new ImageButton(ScreenConsts.WINDOWWIDTH/2+360, ScreenConsts.WINDOWHEIGHT/2+250, Button.SETTINGS_BUTTON)
     };
 
-    Button exit = new BasicButton(100, 100, 80, 80);
+    Button exit = new ImageButton(100, 100, Button.EXIT_BUTTON);
+
+    Button exitConfirmButton    = new BasicButton(ScreenConsts.WINDOWWIDTH/2 + 125,ScreenConsts.WINDOWHEIGHT/2 + 100,160, 50, Color.RED);
+    Button exitNotConfirmButton = new BasicButton(ScreenConsts.WINDOWWIDTH/2 - 125,ScreenConsts.WINDOWHEIGHT/2 + 100,160, 50, Color.GRAY);
 
     int exitButtonCD;
 
-    private boolean exitConfirmation = false;
+    private boolean exitConfirmation;
     @Override
     public void start() {
         exitButtonCD = 5;
+        exitConfirmation = false;
+        exit.reset();
     }
 
     @Override
     public void run() {
         if (exitConfirmation){
-            if (input.keyIsTapped(Input.ESC)){
+            exitConfirmButton.update(input.mousePosX(), input.mousePosY(), input.mouseIsDown(Input.LMB));
+            exitNotConfirmButton.update(input.mousePosX(), input.mousePosY(), input.mouseIsDown(Input.LMB));
+            if (input.keyIsTapped(Input.ESC) || exitNotConfirmButton.isReleased()){
                 exitConfirmation = false;
+            }
+
+            if (exitConfirmButton.isReleased()){
+                handler.end();
             }
         } else {
             if (input.keyIsTapped(Input.ESC)){
@@ -72,9 +83,19 @@ public class MainMenuState extends State {
 
         if (exitConfirmation){
             g.setColor(new Color(40, 40, 40, 180));
-            g.fillRect(0,0,Consts.WINDOWWIDTH, Consts.WINDOWHEIGHT);
+            g.fillRect(0,0,ScreenConsts.WINDOWWIDTH, ScreenConsts.WINDOWHEIGHT);
             g.setColor(Color.WHITE);
-            g.fillRoundRect(Consts.WINDOWWIDTH/2 - 250,Consts.WINDOWHEIGHT/2 - 150,500, 300, 30, 30);
+            g.fillRoundRect(ScreenConsts.WINDOWWIDTH/2 - 250,ScreenConsts.WINDOWHEIGHT/2 - 150,500, 300, 30, 30);
+            g.setColor(Color.BLACK);
+            g.drawString("Are you sure you", ScreenConsts.WINDOWWIDTH/2 - 150,ScreenConsts.WINDOWHEIGHT/2-40);
+            g.drawString("want to leave?", ScreenConsts.WINDOWWIDTH/2 - 130,ScreenConsts.WINDOWHEIGHT/2);
+
+            exitConfirmButton.draw(g);
+            exitNotConfirmButton.draw(g);
+            
+            g.setColor(Color.WHITE);
+            g.drawString("NO", ScreenConsts.WINDOWWIDTH/2 - 125 - 20 + 2,ScreenConsts.WINDOWHEIGHT/2+ 100 + 10);
+            g.drawString("EXIT", ScreenConsts.WINDOWWIDTH/2 + 125 - 40 + 3,ScreenConsts.WINDOWHEIGHT/2+ 100 + 10) ;
         }
     }
 

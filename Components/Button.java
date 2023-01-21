@@ -69,7 +69,10 @@ public abstract class Button {
     public boolean locked(){
         return lock;
     }
-
+    public void reset(){
+        pressed = false;
+        released = false;
+    }
     public boolean isDown(){
         return this.pressed;
     }
